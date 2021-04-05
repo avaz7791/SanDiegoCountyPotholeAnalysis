@@ -5,7 +5,6 @@ __pycache__/
 
 src/config.py
 resources/config/
-resources/config/
 
 # C extensions
 *.so
