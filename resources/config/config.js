@@ -1,2 +1,2 @@
 // API key
-const API_KEY = "ADD_API_KEY"
+const API_KEY = "Testing"
