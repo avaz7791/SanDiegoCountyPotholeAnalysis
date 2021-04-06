@@ -1,0 +1,21 @@
+COPY pothole.stg_pothole (
+	service_request_id, 	service_request_parent_id, 
+	sap_notification_number, 	date_requested, 
+	case_age_days, 	service_name, 
+	case_record_type, 	date_closed, 
+	status, lat, 	lng, 
+	street_address, 	zipcode, 
+	council_district, comm_plan_code, 
+	comm_plan_name, park_name, 
+	case_origin, referred, 
+	public_description, iamfloc, floc)
+/*Update your location of the files here*/	
+FROM 'C:\Users\sonof\UCSDProjects\SanDiegoCountyPotholeAnalysis\resources/pothole_requests_datasd_v1_03292021.csv' DELIMITER ',' CSV HEADER;
+
+
+
+
+COPY pothole.stg_historical_weather (
+	"STATION", "NAME", "LATITUDE", "LONGITUDE", "ELEVATION", "DATE", "DAPR", "MDPR", "PRCP", "TAVG", "TMAX", "TMIN", "TOBS")
+/*Update your location of the files here*/	
+FROM 'C:\Users\sonof\UCSDProjects\SanDiegoCountyPotholeAnalysis\resources/historical_weather.csv' DELIMITER ',' CSV HEADER;
