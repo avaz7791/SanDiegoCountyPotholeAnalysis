@@ -1,7 +1,7 @@
 This project attempts to find any correlations between the following
 
 1. Weather
-2. Pothole formation in dry weather vs after a storm
+2. Pothole formation in dry vs wet weather
 3. City responsiveness to pothole repair based on neighborhood
 
 Using information from the City of San Diego “Get it Done” website [https://www.sandiego.gov/get-it-done]() we were able to download a CSV containing historical data about the City of San Diego (not county) potholes.
@@ -28,9 +28,9 @@ Scatter with linear regression:
 San Diego County or a zoomed-in area that covers the City of San Diego portion of the county with markers for each pothole.
 The markers will be color coded for how quickly the report was closed out.
 
-* 1-2 days = green
-* 3-4 days = yellow
-* 5 or more days = red
+* 1-4 days = green
+* 5-8 days = yellow
+* 9 or more days = red
 
 Since the close-out times are strictly date information, we will ignore the time portion of the “reported” date.  If a pothole is reported on the 1st and closed out by the 3rd, it will count as a green.  1st and 4th, a yellow; 1st and 6th (or later) a red 
 
