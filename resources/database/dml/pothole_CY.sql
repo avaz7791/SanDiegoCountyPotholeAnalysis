@@ -15,9 +15,9 @@ select
 	p.latitude,
 	p.longitude
 	
-from pothole.potholes_f p
-join pothole.date_dim dtr on dtr.date_dim_id = p.skdaterequested
-join pothole.date_dim dtc on dtc.date_dim_id = p.skdateclosed
+from potholes_f p
+left join date_dim dtr on dtr.date_dim_id = p.skdaterequested
+left join date_dim dtc on dtc.date_dim_id = p.skdateclosed
 
 where dtr.year_actual in (2021)
 
