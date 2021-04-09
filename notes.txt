@@ -1,0 +1,9 @@
+ping the database on heroku...line 23
+
+query the table...pothole_cy
+
+
+create a marker layer
+plug in points into marker layer
+create heatmap based on markers
+
