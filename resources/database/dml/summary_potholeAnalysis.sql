@@ -1,3 +1,5 @@
+--truncate "summary_potholeAnalysis"
+
 INSERT INTO "summary_potholeAnalysis"(
 	year_actual, quarter_name, month_actual, month_name, status, cnt_new, cnt_inprocess, cnt_closed, cnt_referred, total_cnt)
 
@@ -24,8 +26,7 @@ group by
 	p.status
 	
 order by 1	
-	--select distinct status 	from pothole.potholes_f p
-	
+	 
 	
 	
 	

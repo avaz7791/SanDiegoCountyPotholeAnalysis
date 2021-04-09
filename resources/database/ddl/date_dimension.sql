@@ -1,8 +1,8 @@
 /* script to create the date dimension*/
 
-DROP TABLE if exists pothole.date_dim;
+DROP TABLE if exists date_dim;
 
-CREATE TABLE pothole.date_dim
+CREATE TABLE date_dim
 (
   date_dim_id              INT NOT NULL,
   date_actual              DATE NOT NULL,
@@ -35,14 +35,14 @@ CREATE TABLE pothole.date_dim
   weekend_indr             BOOLEAN NOT NULL
 );
 
-ALTER TABLE pothole.date_dim ADD CONSTRAINT d_date_date_dim_id_pk PRIMARY KEY (date_dim_id);
+ALTER TABLE date_dim ADD CONSTRAINT d_date_date_dim_id_pk PRIMARY KEY (date_dim_id);
 
 CREATE INDEX d_date_date_actual_idx
-  ON pothole.date_dim(date_actual);
+  ON date_dim(date_actual);
 
 COMMIT;
 
-INSERT INTO pothole.date_dim
+INSERT INTO date_dim
 SELECT TO_CHAR(datum, 'yyyymmdd')::INT AS date_dim_id,
        datum AS date_actual,
        EXTRACT(EPOCH FROM datum) AS epoch,
@@ -82,10 +82,10 @@ SELECT TO_CHAR(datum, 'yyyymmdd')::INT AS date_dim_id,
            END AS weekend_indr
 		   
 		   /*2019-01-01 is the start day of the date dimension */
-FROM (SELECT '2019-01-01'::DATE + SEQUENCE.DAY AS datum
+FROM (SELECT '2015-01-01'::DATE + SEQUENCE.DAY AS datum
 	  /* 2000 numberis the number of days to generate. 
 	  GENERATE_SERIES(0, 2000) */
-      FROM GENERATE_SERIES(0, 2000) AS SEQUENCE (DAY)
+      FROM GENERATE_SERIES(0, 4000) AS SEQUENCE (DAY)
       GROUP BY SEQUENCE.DAY) DQ
 ORDER BY 1;
 
