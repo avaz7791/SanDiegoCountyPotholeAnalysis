@@ -26,9 +26,6 @@ potholedata = [{
         "Longitude": lon,
     }]
 
-
-print(potholedata)
-
 curr.close()
     
 conn.close()
