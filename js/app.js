@@ -1,3 +1,13 @@
+function focusPothole(el) {
+    // Reset the pothol 
+    id = el.id;
+    // Focus on the chosen pothole in the map
+}
+
+
+function resetPothole(el) {
+    // Resets the pothole layer to unfocus from all the visible potholes
+}
 
 // query data
 $.get('../resources/data.csv', function(csvString) {
@@ -91,4 +101,3 @@ onEachFeature: onEachFeature
 
     // legend object to map
     legenddata.addTo(myMap);
-
