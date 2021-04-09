@@ -8,9 +8,9 @@ CREATE TABLE pothole."summary_weatherAnalysis"
     quarter_name character varying(10),
     month_actual integer,
     month_name character varying(5),
-	neighborhood_name character varying(100),
-	latitude double precision,
-	longitude double precision,
+--	neighborhood_name character varying(100),
+--	latitude double precision,
+--	longitude double precision,
 	dapr double precision,
 	mdpr double precision,
 	prcp double precision
