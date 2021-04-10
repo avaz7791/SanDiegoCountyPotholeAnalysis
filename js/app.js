@@ -25,19 +25,19 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
   accessToken: API_KEY
 }).addTo(myMap);
 
-var potholejson = "pothole_cy.json";
+//var potholejson = "pothole_cy.json";
 
-d3.json(potholejson, function(response) {
+// d3.json(potholejson, function(response) {
 
-  console.log(response);
+//   console.log(response);
 
-  for (var i = 0; i < response.length; i++) {
-    var location = response[i].location;
+//   for (var i = 0; i < response.length; i++) {
+//     var location = response[i].location;
 
-    if (location) {
-      L.marker([location.coordinates[0], location.coordinates[1]]).addTo(myMap);
-    }
-  }
+//     if (location) {
+//       L.marker([location.coordinates[0], location.coordinates[1]]).addTo(myMap);
+//     }
+//   }
 
-});
+// });
 //Jeriel--------^
