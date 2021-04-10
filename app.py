@@ -43,7 +43,7 @@ def home():
     return render_template("index.html")
 
 
-@app.route("/pothole_cy")
+#@app.route("/pothole_cy")
 def pothole_data_pull():
     curr = conn.cursor()
 

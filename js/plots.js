@@ -1,8 +1,8 @@
 var summaryPothole = [];
 var summaryWeather = [];
 
-d3.csv("/resources/summary_pothole.csv").then(data => summaryPothole=data);
-d3.csv("/resources/summary_weather.csv").then(data => summaryWeather=data);
+//d3.csv("/resources/summary_pothole.csv").then(data => summaryPothole=data);
+//d3.csv("/resources/summary_weather.csv").then(data => summaryWeather=data);
 
 /**
  * Mockup data for preparing the html and js files
