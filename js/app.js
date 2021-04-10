@@ -1,3 +1,46 @@
+// Amir
+
+function buildPlot() {
+
+  const url ='/api/pothole_cy';
+  d3.json(url).then(function(response){
+      console.log(response);
+
+      const data = response;
+
+      const layout = {
+        scope: "San Diego",
+        title: "Potholes",
+        showlegend: false,
+        height: 600,
+              // width: 980,
+        geo: {
+          scope: "usa",
+          projection: {
+            type: "San Diego"
+          },
+          showland: true,
+          landcolor: "rgb(217, 217, 217)",
+          subunitwidth: 1,
+          countrywidth: 1,
+          subunitcolor: "rgb(255,255,255)",
+          countrycolor: "rgb(255,255,255)"
+        }
+      };
+  
+      Plotly.newPlot("plot", data, layout);
+  });
+
+}
+
+
+//Amir
+
+
+
+
+
+
 function focusPothole(el) {
     // Reset the pothol 
     id = el.id;
