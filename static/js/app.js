@@ -70,7 +70,7 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 }).addTo(myMap);
 
 // Use this link to get the geojson data.
-var link = "{{ url_for('static', filename='council_districts_datasd.geojson') }}";
+var link = "/council_districts_datasd";
 console.log(link)
 // Grabbing our GeoJSON data..
 d3.json(link, function(data) {
