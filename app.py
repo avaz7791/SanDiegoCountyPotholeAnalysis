@@ -1,17 +1,20 @@
 # import necessary libraries
 #from models import create_classes???????
-import os
-from flask import (
-    Flask,
-    render_template,
-    jsonify,
-    request,
-    redirect)
-import psycopg2
-from flask_sqlalchemy import SQLAlchemy
-from c_fig import dbkey
 
+try:
+    import os
+    from flask import (
+        Flask,
+        render_template,
+        jsonify,
+        request,
+        redirect)
+    import psycopg2
+    from flask_sqlalchemy import SQLAlchemy
+    from c_fig import dbkey
 
+except Exception as e:
+    print(f'a module(s) have not been imported {e}')
 
 #################################################
 # Database Setup
@@ -25,6 +28,10 @@ from c_fig import dbkey
 #     password="a3722514ebcbdb13b7548855c5794e8205c88e8c18e9fef14b989481433b517b"
 # )
 
+#################################################
+# Flask Setup
+#################################################
+app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get( 'DATABASE_URL', '').replace("://", "ql://", 1)  or "postgres://gjijwlitunzqrh:a3722514ebcbdb13b7548855c5794e8205c88e8c18e9fef14b989481433b517b@ec2-54-211-176-156.compute-1.amazonaws.com:5432/da9sl2d3dh1uah"
 #Remove tracking modifications
@@ -37,10 +44,6 @@ db = SQLAlchemy(app)
 
 # potholes = Base.classes.pothole_cy
 
-#################################################
-# Flask Setup
-#################################################
-app = Flask(__name__)
 
 
 # create route that renders index.html template
