@@ -34,8 +34,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get( 'DATABASE_URL', '').repl
 # Remove tracking modifications
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-##db = SQLAlchemy(app)????
-
+db = SQLAlchemy(app)
 
 # create route that renders index.html template
 @app.route("/")
@@ -45,21 +44,21 @@ def home():
 
 @app.route("/api/pothole_cy")
 def pothole_data_pull():
-    curr = conn.cursor()
-
-    curr.execute("select srvrequestid, caseagedays, latitude, longitude from pothole_cy")
-    rows = curr.fetchall()
-
     
+    results = db.session.query(potholes_cy.srvrequestid, potholes_cy.caseagedays, potholes_cy.latitude, potholes_cy.longitude ).all()
+        
     requestid = [r[0] for r in rows]
     caseage = [r[1] for r in rows]
-    coordinates = [[r[2] for r in rows],[r[3] for r in rows]]
+    #coordinates = [[r[2] for r in rows],[r[3] for r in rows]]
+    lat = [result[2] for r in results]
+    lng = [result[3] for r in results]
 
     
     potholedata = [{    
         "Service Request ID": requestid,
         "Case Age Days" : caseage,
-        "Location": {"Coordinates": coordinates}
+        "lat": lat,
+        "lon": lng
     }]
 
     curr.close()
@@ -69,3 +68,31 @@ def pothole_data_pull():
 
 if __name__ == "__main__":
     app.run()
+
+
+# @app.route("/api/pothole_cy")
+# def pothole_data_pull():
+#     curr = conn.cursor()
+
+#     curr.execute("select srvrequestid, caseagedays, latitude, longitude from pothole_cy")
+#     rows = curr.fetchall()
+
+    
+#     requestid = [r[0] for r in rows]
+#     caseage = [r[1] for r in rows]
+#     coordinates = [[r[2] for r in rows],[r[3] for r in rows]]
+
+    
+#     potholedata = [{    
+#         "Service Request ID": requestid,
+#         "Case Age Days" : caseage,
+#         "Location": {"Coordinates": coordinates}
+#     }]
+
+#     curr.close()
+#     conn.close()
+#     return jsonify(potholedata)
+
+
+# if __name__ == "__main__":
+#     app.run()
