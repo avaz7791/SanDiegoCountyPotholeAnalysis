@@ -13,7 +13,7 @@ var myMap = L.map("map", {
     accessToken: API_KEY
   }).addTo(myMap);
   
-  var potholejson = "phlocations.json";
+  var potholejson = "pothole_cy.json";
   
   d3.json(potholejson, function(response) {
   

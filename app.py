@@ -62,10 +62,8 @@ def pothole_data_pull():
         "Location": {"Coordinates": coordinates}
     }]
 
-
-
-    #curr.close()
-
+    curr.close()
+    conn.close()
     return jsonify(potholedata)
 
 
