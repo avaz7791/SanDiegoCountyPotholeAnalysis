@@ -26,16 +26,16 @@ from c_fig import dbkey
 # )
 
 
-#app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get( 'DATABASE_URL', '').replace("://", "ql://", 1)  or "postgres://gjijwlitunzqrh:a3722514ebcbdb13b7548855c5794e8205c88e8c18e9fef14b989481433b517b@ec2-54-211-176-156.compute-1.amazonaws.com:5432/da9sl2d3dh1uah"
-# Remove tracking modifications
-#app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-#db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get( 'DATABASE_URL', '').replace("://", "ql://", 1)  or "postgres://gjijwlitunzqrh:a3722514ebcbdb13b7548855c5794e8205c88e8c18e9fef14b989481433b517b@ec2-54-211-176-156.compute-1.amazonaws.com:5432/da9sl2d3dh1uah"
+#Remove tracking modifications
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 
-engine = create_engine(dbkey, echo=False)
-Base = automap_base()
-Base.prepare(engine, reflect= True)
+# engine = create_engine(dbkey, echo=False)
+# Base = automap_base()
+# Base.prepare(engine, reflect= True)
 
-potholes = Base.classes.pothole_cy
+# potholes = Base.classes.pothole_cy
 
 #################################################
 # Flask Setup
@@ -52,9 +52,9 @@ def home():
 @app.route("/api/pothole_cy")
 def pothole_data_pull():
     
-    #results = db.session.query(potholes_cy.srvrequestid, potholes_cy.caseagedays, potholes_cy.latitude, potholes_cy.longitude ).all()
+    results = db.session.query(potholes_cy.srvrequestid, potholes_cy.caseagedays, potholes_cy.latitude, potholes_cy.longitude ).all()
 
-    results = session.query(potholes.srvrequestid ).all()
+    #results = session.query(potholes.srvrequestid ).all()
 
     requestid = [r[0] for r in rows]
     #caseage = [r[1] for r in rows]
