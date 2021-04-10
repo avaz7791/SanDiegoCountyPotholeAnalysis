@@ -55,7 +55,7 @@ def home():
 @app.route("/api/pothole_cy")
 def pothole_data_pull():
     
-    results = db.session.query(potholes_cy.srvrequestid, potholes_cy.caseagedays, potholes_cy.latitude, potholes_cy.longitude ).all()
+    results = db.session.query(pothole_cy.srvrequestid, pothole_cy.caseagedays, pothole_cy.latitude, pothole_cy.longitude ).all()
 
     #results = session.query(potholes.srvrequestid ).all()
 
