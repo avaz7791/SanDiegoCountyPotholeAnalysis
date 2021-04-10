@@ -24,16 +24,16 @@
                 Statistics
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="project.html">Project</a>
+                <a class="dropdown-item" href="/project">Project</a>
                 <a class="dropdown-item" href="/">Map</a>
-                <a class="dropdown-item" href="#">Statistics</a>
+                <a class="dropdown-item" href="/stats">Statistics</a>
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="team.html">Team</a>
+              <a class="nav-link" href="/team">Team</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact</a>
+              <a class="nav-link" href="/contact">Contact</a>
             </li>
           </ul>
         </div>
@@ -58,7 +58,7 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
     <!--Custom javascript files -->
-    <script type="text/javascript" src="/js/plots.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/plots.js') }}"></script>
 
 
   </body>
