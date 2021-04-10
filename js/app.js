@@ -10,7 +10,8 @@ function resetPothole(el) {
 }
 
 // Jeriel -------
-var myMap = L.map("map", {
+//border layer------------------------------
+var myMap = L.map("mapid", {
   center: [32.7157, -117.1611],
   zoom: 11
 });
@@ -24,6 +25,24 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
   id: "mapbox/streets-v11",
   accessToken: API_KEY
 }).addTo(myMap);
+
+// Use this link to get the geojson data.
+var link = "../geojson/council_districts_datasd.geojson";
+
+// Grabbing our GeoJSON data..
+d3.json(link, function(data) {
+  // Creating a GeoJSON layer with the retrieved data
+  L.geoJson(data).addTo(myMap);
+});
+//end border layer--------------------------------------------
+
+
+
+
+
+
+
+
 
 //var potholejson = "pothole_cy.json";
 
