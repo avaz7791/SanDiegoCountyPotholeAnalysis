@@ -1,4 +1,4 @@
-yearRequest,monthRequest,dateRequest,yearClosed,monthClosed,dateClosed, srvrequestid, caseagedays, status, servicename, latitude, longitude
+yearRequest,monthRequest,dateRequest,yearClosed,monthClosed,dateClosed,srvrequestid,caseagedays,status,servicename,latitude,longitude
 2021,Jan,1/12/2021,2021,Jan,1/22/2021,3201988,10,Closed,Pothole,32.7313616,-117.16726
 2021,Jan,1/21/2021,2021,Jan,1/30/2021,3214074,9,Closed,Pothole,32.8644988,-117.23641
 2021,Feb,2/26/2021,,,,3257267,31,In Process,Pothole,32.5546439,-117.04402
