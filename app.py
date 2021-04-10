@@ -55,13 +55,14 @@ def home():
 @app.route("/api/pothole_cy")
 def pothole_data_pull():
     
-    results = db.session.query(pothole_cy.srvrequestid, pothole_cy.caseagedays, pothole_cy.latitude, pothole_cy.longitude ).all()
+    #results = db.session.query(pothole_cy.srvrequestid, pothole_cy.caseagedays, pothole_cy.latitude, pothole_cy.longitude ).all()
+    results = db.session.query(pothole_cy.srvrequestid ).all()
 
     #results = session.query(potholes.srvrequestid ).all()
 
-    requestid = [r[0] for r in rows]
-    #caseage = [r[1] for r in rows]
-    #coordinates = [[r[2] for r in rows],[r[3] for r in rows]]
+    requestid = [r[0] for r in results]
+    #caseage = [r[1] for r in results]
+    
     #lat = [result[2] for r in results]
     #lng = [result[3] for r in results]
 
