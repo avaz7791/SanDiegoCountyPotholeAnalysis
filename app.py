@@ -50,17 +50,19 @@ def pothole_data_pull():
     curr.execute("select srvrequestid, caseagedays, latitude, longitude from pothole_cy")
     rows = curr.fetchall()
 
+    
     requestid = [r[0] for r in rows]
     caseage = [r[1] for r in rows]
-    lat = [r[2] for r in rows]
-    lon = [r[3] for r in rows]
+    coordinates = [[r[2] for r in rows],[r[3] for r in rows]]
 
-    potholedata = [{
+    
+    potholedata = [{    
         "Service Request ID": requestid,
-        "Case Age Days": caseage,
-        "Latitude": lat,
-        "Longitude": lon,
+        "Case Age Days" : caseage,
+        "Location": {"Coordinates": coordinates}
     }]
+
+
 
     #curr.close()
 
