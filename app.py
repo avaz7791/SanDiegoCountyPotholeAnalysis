@@ -1,27 +1,19 @@
 #import necessary libraries
-# from models import create_classes
-import os
-from flask import (
-    Flask,
-    render_template,
-    jsonify,
-    request,
-    redirect,
-    url_for)
+try:
+    from models import create_classes
 
+    import os
+    from flask import (
+        Flask,
+        render_template,
+        jsonify,
+        request,
+        redirect,
+        url_for)
+    from flask_sqlalchemy import SQLAlchemy
 
-# def create_classes(db):
-#     class Pet(db.Model):
-#         __tablename__ = 'pets'
-
-#         id = db.Column(db.Integer, primary_key=True)
-#         name = db.Column(db.String(64))
-#         lat = db.Column(db.Float)
-#         lon = db.Column(db.Float)
-
-#         def __repr__(self):
-#             return '<Pet %r>' % (self.name)
-#     return Pet
+except Exception as e:
+        print(f'a module(s) have not been imported {e}')
 
 #################################################
 # Flask Setup
@@ -32,18 +24,18 @@ app = Flask(__name__)
 # Database Setup
 #################################################
 
-from flask_sqlalchemy import SQLAlchemy
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '').replace("://", "ql://", 1) #or "postgresql://postgres:456789123@localhost:
+
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '').replace("://", "ql://", 1) or "postgres://gjijwlitunzqrh:a3722514ebcbdb13b7548855c5794e8205c88e8c18e9fef14b989481433b517b@ec2-54-211-176-156.compute-1.amazonaws.com:5432/da9sl2d3dh1uah"
 
 #"postgres://gjijwlitunzqrh:a3722514ebcbdb13b7548855c5794e8205c88e8c18e9fef14b989481433b517b@ec2-54-211-176-156.compute-1.amazonaws.com:5432/da9sl2d3dh1uah"
-#os.environ.get('DATABASE_URL', '') or "postgres://gjijwlitunzqrh:a3722514ebcbdb13b7548855c5794e8205c88e8c18e9fef14b989481433b517b@ec2-54-211-176-156.compute-1.amazonaws.com:5432/da9sl2d3dh1uah"
+#os.environ.get('DATABASE_URL', '') 
+
 # Remove tracking modifications
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-
-# Pot = create_classes(db)
+Pot = create_classes(db)
 
 # create route that renders index.html template
 @app.route("/")
@@ -68,27 +60,40 @@ def project():
     return render_template("project.html")
 
 # Query the database and send the jsonified results
-#@app.route("/send", methods=["GET", "POST"])
-#def send():
-   # if request.method == "POST":
-      #  name = request.form["year_actual"]
-        # qn= request.form["quarter_name"]
-        # lon = request.form["month_actual"]
-
-       # pot = Pot(name=name)
-       # db.session.add(pot)
-      #  db.session.commit()
-      #  return redirect("/", code=302)
-
-   # return render_template("form.html")
-
-
-# @app.route("/api/pothole_cy")
-# def ping():
-#     results = db.session.query(Pot.pothole_cy).all()
-#     print(results)
     
-#     return jsonify(results)
+    #     monthRequest = db.Column(db.strin(10)) 
+    #     dateRequest = db.Column(db.date)
+    #     yearClosed  = db.Column(db.Integer)
+    #     monthClosed = db.Column(db.strin(10)) 
+    #     dateClosed  = db.Column(db.date)
+    #     srvrequestid = db.Column(db.strin(50)) 
+    #     caseagedays = db.Column(db.Integer)
+    #     status = db.Column(db.strin(50)) 
+    #     servicename = db.Column(db.strin(40)) 
+
+@app.route("/api/pothole_cy")
+def pothole_cy():
+    results = db.session.query(Pothole.yearRequest, Pothole.latitude, Pothole.longitude).all()
+    
+    yearRequest = [r[0]  for r in results]
+    latitude    = [r[10] for r in results]
+    longitude   = [r[11] for r in results]
+
+    pothole_data = [{
+        "year": yearRequest,
+        "lat": latitude,
+        "lon": longitude,
+
+         "marker": {
+            "size": 50,
+            "line": {
+                "color": "rgb(8,8,8)",
+                "width": 1
+            },
+         }
+    }]
+
+    return jsonify(pothole_data)
 
 
 if __name__ == "__main__":
