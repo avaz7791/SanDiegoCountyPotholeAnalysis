@@ -114,5 +114,50 @@ def pothole_cy():
 
     return jsonify(pothole_data)
 
+@app.route("/api/pothole_all")
+def pothole_all():
+    results = db.session.query(Pothole.srvrequestid, Pothole.latitude, Pothole.longitude,Pothole.status, Pothole.dateRequest ).all()
+    #, Pothole.monthRequest, Pothole.monthClosed, Pothole.dateClosed, Pothole.caseagedays,Pothole.servicename).all()
+    #, Pothole.district
+    
+    #print(results)
+    srvrequestid = [r[0]  for r in results]
+    latitude     = [r[1]  for r in results]
+    longitude    = [r[2]  for r in results]
+    status       = [r[3]  for r in results]
+    dateRequest  = [r[4]  for r in results]
+    #monthRequest = [r[3]  for r in results]
+    #monthClosed  = [r[4]  for r in results]
+    #dateClosed   = [r[5]  for r in results]
+    #caseagedays  = [r[6]  for r in results]
+    #servicename  = [r[7]  for r in results]
+    
+    #district     = [r[10]  for r in results]
+        
+    pothole_data = [{
+        "srvrequestid": srvrequestid,
+        "lat": latitude,
+        "lon": longitude,
+     #   "servicename": servicename,
+        "status": status,
+        "dateRequest": dateRequest,
+        #"monthRequest": monthRequest,
+        #"dateClosed": dateClosed,
+        #"monthClosed": monthClosed,
+        #"caseagedays": caseagedays,
+        
+        #"district": district,
+         "marker": {
+            "size": 50,
+            "line": {
+                "color": "rgb(8,8,8)",
+                "width": 1
+            },
+         }
+    }]
+
+    return jsonify(pothole_data)
+
+
 if __name__ == "__main__":
     app.run()
