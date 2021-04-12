@@ -116,8 +116,8 @@ def pothole_cy():
 
 @app.route("/api/pothole_all")
 def pothole_all():
-    results = db.session.query(Pothole.srvrequestid, Pothole.latitude, Pothole.longitude, Pothole.status, Pothole.dateRequest ).all()
-    #, Pothole.monthRequest, Pothole.monthClosed, Pothole.dateClosed, Pothole.caseagedays,Pothole.servicename).all()
+    results = db.session.query(Pothole.srvrequestid, Pothole.latitude, Pothole.longitude, Pothole.status ).all()
+    #, Pothole.dateRequest, Pothole.monthRequest, Pothole.monthClosed, Pothole.dateClosed, Pothole.caseagedays,Pothole.servicename).all()
     #, Pothole.district
     
     #print(results)
@@ -125,7 +125,7 @@ def pothole_all():
     latitude     = [r[1]  for r in results]
     longitude    = [r[2]  for r in results]
     status       = [r[3]  for r in results]
-    dateRequest  = [r[4]  for r in results]
+    #dateRequest  = [r[4]  for r in results]
     #monthRequest = [r[3]  for r in results]
     #monthClosed  = [r[4]  for r in results]
     #dateClosed   = [r[5]  for r in results]
@@ -140,7 +140,7 @@ def pothole_all():
         "lon": longitude,
      #   "servicename": servicename,
         "status": status,
-        "dateRequest": dateRequest,
+        #"dateRequest": dateRequest,
         #"monthRequest": monthRequest,
         #"dateClosed": dateClosed,
         #"monthClosed": monthClosed,
