@@ -18,11 +18,10 @@ def create_classes(db):
 
         def __repr__(self):
             return '<Pothole %r>' % (self.srvrequestid)
-    return Pothole
-
-
+    
     class Weather(db.Model):
         __tablename__ = 'weather_cy'
+        
         pkid         = db.Column(db.Integer, primary_key=True)
         yearrequest  = db.Column(db.Integer)
         monthrequest = db.Column(db.String(10)) 
@@ -39,4 +38,4 @@ def create_classes(db):
 
         def __repr__(self):
             return '<Weather %r>' % (self.pkid)
-    return Weather
+    return (Pothole, Weather)
