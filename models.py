@@ -23,7 +23,7 @@ def create_classes(db):
 
     class Weather(db.Model):
         __tablename__ = 'weather_cy'
-        PKID         = db.Column(db.Integer, primary_key=True)
+        pkid         = db.Column(db.Integer, primary_key=True)
         yearrequest  = db.Column(db.Integer)
         monthrequest = db.Column(db.String(10)) 
         daterequest  = db.Column(db.Date)
@@ -38,5 +38,5 @@ def create_classes(db):
                 
 
         def __repr__(self):
-            return '<Weather %r>' % (self.PKID)
+            return '<Weather %r>' % (self.pkid)
     return Weather
