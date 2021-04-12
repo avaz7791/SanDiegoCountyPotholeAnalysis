@@ -19,3 +19,24 @@ def create_classes(db):
         def __repr__(self):
             return '<Pothole %r>' % (self.srvrequestid)
     return Pothole
+
+
+    class Weather(db.Model):
+        __tablename__ = 'weather_cy'
+
+        yearrequest  = db.Column(db.Integer)
+        monthrequest = db.Column(db.String(10)) 
+        daterequest  = db.Column(db.Date)
+        station      = db.Column(db.String(50)) 
+        name         = db.Column(db.String(50)) 
+        latitude     = db.Column(db.Float)
+        longitude    = db.Column(db.Float)
+        elevation    = db.Column(db.Float)
+        dapr         = db.Column(db.Integer)
+        mdpr         = db.Column(db.Float)
+        prcp         = db.Column(db.Float)
+                
+
+        def __repr__(self):
+            return '<Weather %r>' % (self.station)
+    return Weather
