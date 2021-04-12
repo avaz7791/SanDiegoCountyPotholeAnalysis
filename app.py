@@ -130,9 +130,8 @@ def pothole_all():
 
 @app.route("/api/weather_cy")
 def weather_cy():
-    results = db.session.query(Weather.pkid, Weather.dateRequest, Weather.station, Weather.name, Weather.latitude, Weather.longitude).all()
+    results = db.session.query(Weather.pkid, Weather.dateRequest, Weather.station, Weather.name, Weather.latitude, Weather.longitude, Weather.monthRequest, Weather.elevation, Weather.dapr, Weather.mdpr, Weather.prcp).all()
     
-    #Weather.monthRequest, Weather.elevation, Weather.dapr, Weather.mdpr, Weather.prcp
     #print(results)
     pkid            = [r[0]  for r in results]
     dateRequest     = [r[1]  for r in results]
@@ -140,11 +139,11 @@ def weather_cy():
     name            = [r[3]  for r in results]
     latitude        = [r[4]  for r in results]
     longitude       = [r[5]  for r in results]
-    #monthRequest    = [r[1]  for r in results]
-    #elevation       = [r[7]  for r in results]
-    #dapr            = [r[8]  for r in results]
-    #mdpr            = [r[9]  for r in results]
-    #prcp            = [r[10]  for r in results]
+    monthRequest    = [r[6]  for r in results]
+    elevation       = [r[7]  for r in results]
+    dapr            = [r[8]  for r in results]
+    mdpr            = [r[9]  for r in results]
+    prcp            = [r[10]  for r in results]
         
     weather_data = [{
         "ID": pkid,
@@ -154,12 +153,12 @@ def weather_cy():
         "coordinates":{ 
                 "lat": latitude,
                 "lon": longitude},
-        #"monthrequest": monthRequest,
+        "monthrequest": monthRequest,
         
-        #"elevation": elevation,
-        #"dapr": dapr,
-        #"mdpr": mdpr,
-        #"prcp": prcp,
+        "elevation": elevation,
+        "dapr": dapr,
+        "mdpr": mdpr,
+        "prcp": prcp,
          "marker": {
             "size": 50,
             "line": {
