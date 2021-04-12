@@ -137,8 +137,8 @@ def pothole_all():
         "dateClosed": dateclosed,
         "monthClosed": monthclosed,
         "caseagedays": caseagedays,
-     #   "servicename": servicename,
-     #   "district": district,
+        "servicename": servicename,
+        "district": district,
          "marker": {
             "size": 50,
             "line": {
