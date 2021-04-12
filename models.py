@@ -2,12 +2,12 @@ def create_classes(db):
     class Pothole(db.Model):
         __tablename__ = 'pothole_cy'
 
-        yearRequest  = db.Column(db.Integer)
-        monthRequest = db.Column(db.String(10)) 
-        dateRequest  = db.Column(db.Date)
-        yearClosed   = db.Column(db.Integer)
-        monthClosed  = db.Column(db.String(10)) 
-        dateClosed   = db.Column(db.Date)
+        yearrequest  = db.Column(db.Integer)
+        monthrequest = db.Column(db.String(10)) 
+        daterequest  = db.Column(db.Date)
+        yearclosed   = db.Column(db.Integer)
+        monthclosed  = db.Column(db.String(10)) 
+        dateclosed   = db.Column(db.Date)
         srvrequestid = db.Column(db.String(50), primary_key=True) 
         caseagedays  = db.Column(db.Integer)
         status       = db.Column(db.String(50)) 
