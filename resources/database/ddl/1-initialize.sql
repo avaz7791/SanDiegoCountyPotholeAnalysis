@@ -82,9 +82,9 @@ ALTER TABLE pothole.stg_pothole
 
 -- Table: pothole.potholes_f
 
-DROP TABLE IF EXISTS pothole.potholes_f;
+DROP TABLE IF EXISTS potholes_f;
 
-CREATE TABLE pothole.potholes_f
+CREATE TABLE potholes_f
 (
     pkpothole serial NOT NULL ,
     srvrequestid character varying(40) COLLATE pg_catalog."default",
@@ -98,12 +98,13 @@ CREATE TABLE pothole.potholes_f
     status character varying(40) COLLATE pg_catalog."default",
     latitude double precision,
     longitude double precision,
+	district double precision,
     CONSTRAINT f_potholes_pkey PRIMARY KEY (pkpothole)
 )
 
 TABLESPACE pg_default;
 
-ALTER TABLE pothole.potholes_f
+ALTER TABLE potholes_f
     OWNER to postgres;
 	
 	

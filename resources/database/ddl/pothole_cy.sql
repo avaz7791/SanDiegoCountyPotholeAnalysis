@@ -1,8 +1,8 @@
--- Table: pothole.pothole_cy
+-- Table: public.pothole_cy
 
-DROP TABLE IF EXISTS pothole.pothole_cy;
+DROP TABLE if exists public.pothole_cy;
 
-CREATE TABLE pothole.pothole_cy
+CREATE TABLE public.pothole_cy
 (
     "yearRequest" integer,
     "monthRequest" character varying(10) COLLATE pg_catalog."default",
@@ -15,10 +15,11 @@ CREATE TABLE pothole.pothole_cy
     status character varying(50) COLLATE pg_catalog."default",
     servicename character varying(40) COLLATE pg_catalog."default",
     latitude double precision,
-    longitude double precision
+    longitude double precision,
+	district double precision
 )
 
 TABLESPACE pg_default;
 
-ALTER TABLE pothole.pothole_cy
+ALTER TABLE public.pothole_cy
     OWNER to postgres;

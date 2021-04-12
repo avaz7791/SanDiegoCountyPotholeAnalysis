@@ -1,5 +1,5 @@
-INSERT INTO pothole.pothole_cy(
-	"yearRequest", "monthRequest", "dateRequest", "yearClosed", "monthClosed", "dateClosed", srvrequestid, caseagedays, status, servicename, latitude, longitude)
+INSERT INTO pothole_cy(
+	"yearRequest", "monthRequest", "dateRequest", "yearClosed", "monthClosed", "dateClosed", srvrequestid, caseagedays, status, servicename, latitude, longitude, district)
 	
 select 
 	dtr.year_actual as yearRequest,
@@ -13,7 +13,8 @@ select
 	p.status,
 	p.servicename,
 	p.latitude,
-	p.longitude
+	p.longitude,
+	p.district
 	
 from potholes_f p
 left join date_dim dtr on dtr.date_dim_id = p.skdaterequested
@@ -22,4 +23,6 @@ left join date_dim dtc on dtc.date_dim_id = p.skdateclosed
 where dtr.year_actual in (2021)
 
 
-select * from pothole.pothole_cy
+select * from pothole_cy
+
+
