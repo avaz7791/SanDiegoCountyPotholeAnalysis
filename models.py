@@ -23,11 +23,11 @@ def create_classes(db):
 
     class Weather(db.Model):
         __tablename__ = 'weather_cy'
-
+        PKID         = db.Column(db.Integer, primary_key=True)
         yearrequest  = db.Column(db.Integer)
         monthrequest = db.Column(db.String(10)) 
         daterequest  = db.Column(db.Date)
-        station      = db.Column(db.String(50), primary_key=True) 
+        station      = db.Column(db.String(50)) 
         name         = db.Column(db.String(50)) 
         latitude     = db.Column(db.Float)
         longitude    = db.Column(db.Float)
@@ -38,5 +38,5 @@ def create_classes(db):
                 
 
         def __repr__(self):
-            return '<Weather %r>' % (self.station)
+            return '<Weather %r>' % (self.PKID)
     return Weather
