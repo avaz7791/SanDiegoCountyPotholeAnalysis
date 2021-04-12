@@ -133,7 +133,7 @@ def weather_cy():
     results = db.session.query(Weather.pkid, Weather.monthrequest, Weather.daterequest, Weather.station, Weather.name, Weather.latitude, Weather.longitude, Weather.elevation, Weather.dapr, Weather.mdpr, Weather.prcp).all()
     
     #print(results)
-    pkid     = [r[0]  for r in results]
+    pkid            = [r[0]  for r in results]
     monthrequest    = [r[1]  for r in results]
     daterequest     = [r[2]  for r in results]
     station         = [r[3]  for r in results]
@@ -150,7 +150,6 @@ def weather_cy():
         "station": station,
         "lat": latitude,
         "lon": longitude,
-        "yearrequest": yearrequest,
         "monthrequest": monthrequest,
         "daterequest": daterequest,
         "name": name,
