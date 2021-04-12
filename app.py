@@ -72,12 +72,14 @@ def council_districts_datasd():
 
 @app.route("/api/pothole_cy")
 def pothole_cy():
-    results = db.session.query(Pothole.srvrequestid ).all()
+    results = db.session.query(Pothole.srvrequestid, Pothole.latitude, Pothole.longitude ).all()
     #Pothole.status, Pothole.dateRequest, Pothole.monthRequest, Pothole.monthClosed, Pothole.dateClosed, Pothole.caseagedays,Pothole.servicename, Pothole.latitude, Pothole.longitude).all()
     #, Pothole.district
     
     #print(results)
     srvrequestid = [r[0]  for r in results]
+    latitude     = [r[1]  for r in results]
+    longitude    = [r[2]  for r in results]
     #status       = [r[1]  for r in results]
     #dateRequest  = [r[2]  for r in results]
     #monthRequest = [r[3]  for r in results]
@@ -85,12 +87,13 @@ def pothole_cy():
     #dateClosed   = [r[5]  for r in results]
     #caseagedays  = [r[6]  for r in results]
     #servicename  = [r[7]  for r in results]
-    #latitude     = [r[8]  for r in results]
-    #longitude    = [r[9]  for r in results]
+    
     #district     = [r[10]  for r in results]
         
     pothole_data = [{
         "srvrequestid": srvrequestid,
+        "lat": latitude,
+        "lon": longitude,
      #   "servicename": servicename,
       #  "status": status,
        # "dateRequest": dateRequest,
@@ -98,8 +101,7 @@ def pothole_cy():
         #"dateClosed": dateClosed,
         #"monthClosed": monthClosed,
         #"caseagedays": caseagedays,
-        #"lat": latitude,
-        #"lon": longitude,
+        
         #"district": district,
          "marker": {
             "size": 50,
