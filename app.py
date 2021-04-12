@@ -109,9 +109,5 @@ def pothole_cy():
 
     return jsonify(pothole_data)
 
-# Weather CY
-
-
-
 if __name__ == "__main__":
     app.run()
