@@ -65,40 +65,41 @@ def team():
 @app.route("/project")
 def project():
     return render_template("project.html")
-    
+
 @app.route("/council_districts_datasd")
 def council_districts_datasd():
     return redirect(url_for("static", filename="geojson/council_districts_datasd.geojson"))
 
 @app.route("/api/pothole_cy")
 def pothole_cy():
-    results = db.session.query(Pothole.srvrequestid, Pothole.status, Pothole.dateRequest, Pothole.monthRequest, Pothole.monthClosed, Pothole.dateClosed, Pothole.caseagedays,Pothole.servicename, Pothole.latitude, Pothole.longitude).all()
+    results = db.session.query(Pothole.srvrequestid ).all()
+    #Pothole.status, Pothole.dateRequest, Pothole.monthRequest, Pothole.monthClosed, Pothole.dateClosed, Pothole.caseagedays,Pothole.servicename, Pothole.latitude, Pothole.longitude).all()
     #, Pothole.district
     
     #print(results)
     srvrequestid = [r[0]  for r in results]
-    status       = [r[1]  for r in results]
-    dateRequest  = [r[2]  for r in results]
-    monthRequest = [r[3]  for r in results]
-    monthClosed  = [r[4]  for r in results]
-    dateClosed   = [r[5]  for r in results]
-    caseagedays  = [r[6]  for r in results]
-    servicename  = [r[7]  for r in results]
-    latitude     = [r[8]  for r in results]
-    longitude    = [r[9]  for r in results]
-    district     = [r[10]  for r in results]
+    #status       = [r[1]  for r in results]
+    #dateRequest  = [r[2]  for r in results]
+    #monthRequest = [r[3]  for r in results]
+    #monthClosed  = [r[4]  for r in results]
+    #dateClosed   = [r[5]  for r in results]
+    #caseagedays  = [r[6]  for r in results]
+    #servicename  = [r[7]  for r in results]
+    #latitude     = [r[8]  for r in results]
+    #longitude    = [r[9]  for r in results]
+    #district     = [r[10]  for r in results]
         
     pothole_data = [{
         "srvrequestid": srvrequestid,
-        "servicename": servicename,
-        "status": status,
-        "dateRequest": dateRequest,
-        "monthRequest": monthRequest,
-        "dateClosed": dateClosed,
-        "monthClosed": monthClosed,
-        "caseagedays": caseagedays,
-        "lat": latitude,
-        "lon": longitude,
+     #   "servicename": servicename,
+      #  "status": status,
+       # "dateRequest": dateRequest,
+        #"monthRequest": monthRequest,
+        #"dateClosed": dateClosed,
+        #"monthClosed": monthClosed,
+        #"caseagedays": caseagedays,
+        #"lat": latitude,
+        #"lon": longitude,
         #"district": district,
          "marker": {
             "size": 50,
@@ -110,9 +111,6 @@ def pothole_cy():
     }]
 
     return jsonify(pothole_data)
-
-
-
 
 if __name__ == "__main__":
     app.run()
