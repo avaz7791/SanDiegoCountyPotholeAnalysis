@@ -130,33 +130,37 @@ def pothole_all():
 
 @app.route("/api/weather_cy")
 def weather_cy():
-    results = db.session.query(Weather.pkid, Weather.monthrequest, Weather.daterequest, Weather.station, Weather.name, Weather.latitude, Weather.longitude, Weather.elevation, Weather.dapr, Weather.mdpr, Weather.prcp).all()
+    results = db.session.query(Weather.pkid, Weather.daterequest, Weather.station, Weather.name, Weather.latitude, Weather.longitude).all()
     
+    #Weather.monthrequest,, Weather.elevation, Weather.dapr, Weather.mdpr, Weather.prcp
     #print(results)
     pkid            = [r[0]  for r in results]
-    monthrequest    = [r[1]  for r in results]
-    daterequest     = [r[2]  for r in results]
-    station         = [r[3]  for r in results]
-    name            = [r[4]  for r in results]
-    latitude        = [r[5]  for r in results]
-    longitude       = [r[6]  for r in results]
-    elevation       = [r[7]  for r in results]
-    dapr            = [r[8]  for r in results]
-    mdpr            = [r[9]  for r in results]
-    prcp            = [r[10]  for r in results]
+    daterequest     = [r[1]  for r in results]
+    station         = [r[2]  for r in results]
+    name            = [r[3]  for r in results]
+    latitude        = [r[4]  for r in results]
+    longitude       = [r[5]  for r in results]
+    #monthrequest    = [r[1]  for r in results]
+    #elevation       = [r[7]  for r in results]
+    #dapr            = [r[8]  for r in results]
+    #mdpr            = [r[9]  for r in results]
+    #prcp            = [r[10]  for r in results]
         
     weather_data = [{
         "ID": pkid,
         "station": station,
-        "lat": latitude,
-        "lon": longitude,
-        "monthrequest": monthrequest,
-        "daterequest": daterequest,
         "name": name,
-        "elevation": elevation,
-        "dapr": dapr,
-        "mdpr": mdpr,
-        "prcp": prcp,
+        "daterequest": daterequest,
+        "coordinates":{ 
+                "lat": latitude,
+                "lon": longitude},
+        #"monthrequest": monthrequest,
+        
+        
+        #"elevation": elevation,
+        #"dapr": dapr,
+        #"mdpr": mdpr,
+        #"prcp": prcp,
          "marker": {
             "size": 50,
             "line": {
