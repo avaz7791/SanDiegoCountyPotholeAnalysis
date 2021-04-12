@@ -23,9 +23,9 @@ def create_classes(db):
         __tablename__ = 'weather_cy'
         
         pkid         = db.Column(db.Integer, primary_key=True)
-        yearrequest  = db.Column(db.Integer)
-        monthrequest = db.Column(db.String(10)) 
-        daterequest  = db.Column(db.Date)
+        yearRequest  = db.Column(db.Integer)
+        monthRequest = db.Column(db.String(10)) 
+        dateRequest  = db.Column(db.Date)
         station      = db.Column(db.String(50)) 
         name         = db.Column(db.String(50)) 
         latitude     = db.Column(db.Float)
