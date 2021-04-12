@@ -14,7 +14,7 @@ def create_classes(db):
         servicename  = db.Column(db.String(40)) 
         latitude     = db.Column(db.Float)
         longitude    = db.Column(db.Float)
-      #  district     = db.Column(db.Float)
+        district     = db.Column(db.Float)
 
         def __repr__(self):
             return '<Pothole %r>' % (self.srvrequestid)
