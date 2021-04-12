@@ -27,7 +27,7 @@ def create_classes(db):
         yearrequest  = db.Column(db.Integer)
         monthrequest = db.Column(db.String(10)) 
         daterequest  = db.Column(db.Date)
-        station      = db.Column(db.String(50)) 
+        station      = db.Column(db.String(50), primary_key=True) 
         name         = db.Column(db.String(50)) 
         latitude     = db.Column(db.Float)
         longitude    = db.Column(db.Float)
