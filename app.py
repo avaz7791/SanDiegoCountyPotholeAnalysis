@@ -116,9 +116,8 @@ def pothole_cy():
 
 @app.route("/api/pothole_all")
 def pothole_all():
-    results = db.session.query(Pothole.srvrequestid, Pothole.latitude, Pothole.longitude, Pothole.status, Pothole.daterequest ).all()
-    #, , Pothole.monthRequest, Pothole.monthClosed, Pothole.dateClosed, Pothole.caseagedays,Pothole.servicename).all()
-    #, Pothole.district
+    results = db.session.query(Pothole.srvrequestid, Pothole.latitude, Pothole.longitude, Pothole.status, Pothole.daterequest, Pothole.monthrequest, Pothole.monthclosed, Pothole.dateclosed, Pothole.caseagedays,Pothole.servicename, Pothole.district ).all()
+    
     
     #print(results)
     srvrequestid = [r[0]  for r in results]
@@ -126,12 +125,12 @@ def pothole_all():
     longitude    = [r[2]  for r in results]
     status       = [r[3]  for r in results]
     daterequest  = [r[4]  for r in results]
-    #monthrequest = [r[5]  for r in results]
-    # monthClosed  = [r[6]  for r in results]
-    # dateClosed   = [r[7]  for r in results]
-    # caseagedays  = [r[8]  for r in results]
-    # servicename  = [r[9]  for r in results]
-    # district     = [r[10]  for r in results]
+    monthrequest = [r[5]  for r in results]
+    monthClosed  = [r[6]  for r in results]
+    dateClosed   = [r[7]  for r in results]
+    caseagedays  = [r[8]  for r in results]
+    servicename  = [r[9]  for r in results]
+    district     = [r[10]  for r in results]
         
     pothole_data = [{
         "srvrequestid": srvrequestid,
@@ -139,13 +138,12 @@ def pothole_all():
         "lon": longitude,
         "status": status,
         "daterequest": daterequest,
-        #   "servicename": servicename,
-        #"monthRequest": monthRequest,
-        #"dateClosed": dateClosed,
-        #"monthClosed": monthClosed,
-        #"caseagedays": caseagedays,
-        
-        #"district": district,
+        "monthRequest": monthrequest,
+        "dateClosed": dateclosed,
+        "monthClosed": monthclosed,
+        "caseagedays": caseagedays,
+        "servicename": servicename,
+        "district": district,
          "marker": {
             "size": 50,
             "line": {
