@@ -65,11 +65,15 @@ def team():
 @app.route("/project")
 def project():
     return render_template("project.html")
-
+    
+@app.route("/council_districts_datasd")
+def council_districts_datasd():
+    return redirect(url_for("static", filename="geojson/council_districts_datasd.geojson"))
 
 @app.route("/api/pothole_cy")
 def pothole_cy():
-    results = db.session.query(Pothole.srvrequestid, Pothole.status, Pothole.dateRequest, Pothole.monthRequest, Pothole.monthClosed, Pothole.dateClosed, Pothole.caseagedays,Pothole.servicename, Pothole.latitude, Pothole.longitude, Pothole.district).all()
+    results = db.session.query(Pothole.srvrequestid, Pothole.status, Pothole.dateRequest, Pothole.monthRequest, Pothole.monthClosed, Pothole.dateClosed, Pothole.caseagedays,Pothole.servicename, Pothole.latitude, Pothole.longitude).all()
+    #, Pothole.district
     
     #print(results)
     srvrequestid = [r[0]  for r in results]
@@ -95,7 +99,7 @@ def pothole_cy():
         "caseagedays": caseagedays,
         "lat": latitude,
         "lon": longitude,
-        "district": district,
+        #"district": district,
          "marker": {
             "size": 50,
             "line": {
@@ -107,9 +111,7 @@ def pothole_cy():
 
     return jsonify(pothole_data)
 
-@app.route("/council_districts_datasd")
-def council_districts_datasd():
-    return redirect(url_for("static", filename="geojson/council_districts_datasd.geojson"))
+
 
 
 if __name__ == "__main__":
