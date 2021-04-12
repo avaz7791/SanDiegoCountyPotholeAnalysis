@@ -126,20 +126,19 @@ def pothole_all():
     longitude    = [r[2]  for r in results]
     status       = [r[3]  for r in results]
     daterequest  = [r[4]  for r in results]
-    #monthRequest = [r[3]  for r in results]
-    #monthClosed  = [r[4]  for r in results]
-    #dateClosed   = [r[5]  for r in results]
-    #caseagedays  = [r[6]  for r in results]
-    #servicename  = [r[7]  for r in results]
-    
-    #district     = [r[10]  for r in results]
+    #monthrequest = [r[5]  for r in results]
+    # monthClosed  = [r[6]  for r in results]
+    # dateClosed   = [r[7]  for r in results]
+    # caseagedays  = [r[8]  for r in results]
+    # servicename  = [r[9]  for r in results]
+    # district     = [r[10]  for r in results]
         
     pothole_data = [{
         "srvrequestid": srvrequestid,
         "lat": latitude,
         "lon": longitude,
         "status": status,
-        "daterequest": dateRequest,
+        "daterequest": daterequest,
         #   "servicename": servicename,
         #"monthRequest": monthRequest,
         #"dateClosed": dateClosed,
