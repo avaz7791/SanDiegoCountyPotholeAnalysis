@@ -66,28 +66,25 @@ def team():
 def project():
     return render_template("project.html")
 
-# Query the database and send the jsonified results
-    
-    #     monthRequest = db.Column(db.strin(10)) 
-    #     dateRequest = db.Column(db.date)
-    #     yearClosed  = db.Column(db.Integer)
-    #     monthClosed = db.Column(db.strin(10)) 
-    #     dateClosed  = db.Column(db.date)
-    #     srvrequestid = db.Column(db.strin(50)) 
-    #     caseagedays = db.Column(db.Integer)
-    #     status = db.Column(db.strin(50)) 
-    #     servicename = db.Column(db.strin(40)) 
-
-
 
 @app.route("/api/pothole_cy")
 def pothole_cy():
-    results = db.session.query(Pothole.yearRequest, Pothole.latitude, Pothole.longitude).all()
-    print(results)
-    yearRequest = [r[0]  for r in results]
-    latitude    = [r[1] for r in results]
-    longitude   = [r[2] for r in results]
-
+    results = db.session.query(Pothole.srvrequestid,Pothole.status,Pothole.dateRequest,Pothole.monthRequest,Pothole.yearRequest,Pothole.yearClosed, Pothole.monthClosed,Pothole.dateClosed,Pothole.caseagedays,Pothole.servicename, Pothole.latitude, Pothole.longitude).all()
+    
+    #print(results)
+    srvrequestid = [r[0]  for r in results]
+    status       = [r[1]  for r in results]
+    dateRequest  = [r[2]  for r in results]
+    monthRequest = [r[3]  for r in results]
+    yearRequest  = [r[4]  for r in results]
+    yearClosed   = [r[5]  for r in results]
+    monthClosed  = [r[6]  for r in results]
+    dateClosed   = [r[7]  for r in results]
+    caseagedays  = [r[8]  for r in results]
+    servicename  = [r[9]  for r in results]
+    latitude     = [r[10]  for r in results]
+    longitude    = [r[11]  for r in results]
+        
     pothole_data = [{
         "year": yearRequest,
         "lat": latitude,
