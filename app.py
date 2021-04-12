@@ -132,33 +132,34 @@ def pothole_all():
 
 @app.route("/api/weather_cy")
 def weather_cy():
-    results = db.session.query(Weather.yearrequest, Weather.monthrequest, Weather.daterequest, Weather.station, Weather.name, Weather.latitude, Weather.longitude, Weather.elevation, Weather.dapr, Weather.mdpr, Weather.prcp).all()
+    results = db.session.query(Weather.yearrequest).all()
+    #, Weather.monthrequest, Weather.daterequest, Weather.station, Weather.name, Weather.latitude, Weather.longitude, Weather.elevation, Weather.dapr, Weather.mdpr, Weather.prcp).all()
     
     #print(results)
     yearrequest     = [r[0]  for r in results]
-    monthrequest    = [r[1]  for r in results]
-    daterequest     = [r[2]  for r in results]
-    station         = [r[3]  for r in results]
-    name            = [r[4]  for r in results]
-    latitude        = [r[5]  for r in results]
-    longitude       = [r[6]  for r in results]
-    elevation       = [r[7]  for r in results]
-    dapr            = [r[8]  for r in results]
-    mdpr            = [r[9]  for r in results]
-    prcp            = [r[10]  for r in results]
+    # monthrequest    = [r[1]  for r in results]
+    # daterequest     = [r[2]  for r in results]
+    # station         = [r[3]  for r in results]
+    # name            = [r[4]  for r in results]
+    # latitude        = [r[5]  for r in results]
+    # longitude       = [r[6]  for r in results]
+    # elevation       = [r[7]  for r in results]
+    # dapr            = [r[8]  for r in results]
+    # mdpr            = [r[9]  for r in results]
+    # prcp            = [r[10]  for r in results]
         
     weather_data = [{
-        "station": station,
-        "lat": latitude,
-        "lon": longitude,
+        # "station": station,
+        # "lat": latitude,
+        # "lon": longitude,
         "yearrequest": yearrequest,
-        "monthrequest": monthrequest,
-        "daterequest": daterequest,
-        "name": name,
-        "elevation": elevation,
-        "dapr": dapr,
-        "mdpr": mdpr,
-        "prcp": prcp,
+        # "monthrequest": monthrequest,
+        # "daterequest": daterequest,
+        # "name": name,
+        # "elevation": elevation,
+        # "dapr": dapr,
+        # "mdpr": mdpr,
+        # "prcp": prcp,
          "marker": {
             "size": 50,
             "line": {
@@ -168,7 +169,7 @@ def weather_cy():
          }
     }]
 
-    return jsonify(pothole_data)
+    return jsonify(weather_data)
 
 if __name__ == "__main__":
     app.run()
