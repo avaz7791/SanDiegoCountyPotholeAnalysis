@@ -132,11 +132,11 @@ def pothole_all():
 
 @app.route("/api/weather_cy")
 def weather_cy():
-    results = db.session.query(Weather.yearrequest).all()
+    results = db.session.query(Weather.pkid).all()
     #, Weather.monthrequest, Weather.daterequest, Weather.station, Weather.name, Weather.latitude, Weather.longitude, Weather.elevation, Weather.dapr, Weather.mdpr, Weather.prcp).all()
     
     #print(results)
-    yearrequest     = [r[0]  for r in results]
+    pkid     = [r[0]  for r in results]
     # monthrequest    = [r[1]  for r in results]
     # daterequest     = [r[2]  for r in results]
     # station         = [r[3]  for r in results]
@@ -149,10 +149,11 @@ def weather_cy():
     # prcp            = [r[10]  for r in results]
         
     weather_data = [{
+        "ID": pkid,
         # "station": station,
         # "lat": latitude,
         # "lon": longitude,
-        "yearrequest": yearrequest,
+        #"yearrequest": yearrequest,
         # "monthrequest": monthrequest,
         # "daterequest": daterequest,
         # "name": name,
