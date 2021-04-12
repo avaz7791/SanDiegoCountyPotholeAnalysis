@@ -125,7 +125,7 @@ def pothole_all():
     dateClosed   = [r[7]  for r in results]
     caseagedays  = [r[8]  for r in results]
     servicename  = [r[9]  for r in results]
-    district     = [r[10]  for r in results]
+    #district     = [r[10]  for r in results]
         
     pothole_data = [{
         "srvrequestid": srvrequestid,
@@ -138,7 +138,7 @@ def pothole_all():
         "monthClosed": monthclosed,
         "caseagedays": caseagedays,
         "servicename": servicename,
-        "district": district,
+     #   "district": district,
          "marker": {
             "size": 50,
             "line": {
