@@ -109,6 +109,52 @@ def pothole_cy():
 
     return jsonify(pothole_data)
 
+# Weather CY
+@app.route("/api/pothole_cy")
+def pothole_cy():
+    results = db.session.query(Pothole.srvrequestid,Pothole.status,Pothole.dateRequest,Pothole.monthRequest,Pothole.yearRequest,Pothole.yearClosed, Pothole.monthClosed,Pothole.dateClosed,Pothole.caseagedays,Pothole.servicename, Pothole.latitude, Pothole.longitude,  Pothole.district).all()
+    
+    #print(results)
+    srvrequestid = [r[0]  for r in results]
+    status       = [r[1]  for r in results]
+    dateRequest  = [r[2]  for r in results]
+    monthRequest = [r[3]  for r in results]
+    yearRequest  = [r[4]  for r in results]
+    yearClosed   = [r[5]  for r in results]
+    monthClosed  = [r[6]  for r in results]
+    dateClosed   = [r[7]  for r in results]
+    caseagedays  = [r[8]  for r in results]
+    servicename  = [r[9]  for r in results]
+    latitude     = [r[10]  for r in results]
+    longitude    = [r[11]  for r in results]
+    district     = [r[12]  for r in results]
+        
+    pothole_data = [{
+        "srvrequestid": srvrequestid,
+        "servicename": servicename,
+        "status": status,
+        "dateRequest": dateRequest,
+        "monthRequest": monthRequest,
+        "yearRequest": yearRequest,
+        "dateClosed": dateClosed,
+        "monthClosed": monthClosed,
+        "yearClosed": yearClosed,
+        "caseagedays": caseagedays,
+        "lat": latitude,
+        "lon": longitude,
+        "district": district,
+         "marker": {
+            "size": 50,
+            "line": {
+                "color": "rgb(8,8,8)",
+                "width": 1
+            },
+         }
+    }]
+
+    return jsonify(pothole_data)
+
+
 
 if __name__ == "__main__":
     app.run()
