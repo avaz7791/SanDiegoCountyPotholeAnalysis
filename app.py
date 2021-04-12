@@ -86,10 +86,18 @@ def pothole_cy():
     longitude    = [r[11]  for r in results]
         
     pothole_data = [{
-        "year": yearRequest,
+        "srvrequestid": srvrequestid,
+        "servicename": servicename,
+        "status": status,
+        "dateRequest": dateRequest,
+        "monthRequest": monthRequest,
+        "yearRequest": yearRequest,
+        "dateClosed": dateClosed,
+        "monthClosed": monthClosed,
+        "yearClosed": yearClosed,
+        "caseagedays": caseagedays,
         "lat": latitude,
         "lon": longitude,
-
          "marker": {
             "size": 50,
             "line": {
