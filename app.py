@@ -76,8 +76,8 @@ def pothole_cy():
     status       = [r[1]  for r in results]
     dateRequest  = [r[2]  for r in results]
     monthRequest = [r[3]  for r in results]
-    yearRequest  = [r[4]  for r in results]
-    yearClosed   = [r[5]  for r in results]
+    #yearRequest  = [r[4]  for r in results]
+    #yearClosed   = [r[5]  for r in results]
     monthClosed  = [r[6]  for r in results]
     dateClosed   = [r[7]  for r in results]
     caseagedays  = [r[8]  for r in results]
@@ -92,10 +92,8 @@ def pothole_cy():
         "status": status,
         "dateRequest": dateRequest,
         "monthRequest": monthRequest,
-        "yearRequest": yearRequest,
         "dateClosed": dateClosed,
         "monthClosed": monthClosed,
-        "yearClosed": yearClosed,
         "caseagedays": caseagedays,
         "lat": latitude,
         "lon": longitude,
