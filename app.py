@@ -109,8 +109,9 @@ def pothole_cy():
 
     return jsonify(pothole_data)
 
-# Weather CY
-
+@app.route("/council_districts_datasd")
+def council_districts_datasd():
+    return redirect(url_for("static", filename="geojson/council_districts_datasd.geojson"))
 
 
 if __name__ == "__main__":
