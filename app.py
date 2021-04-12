@@ -12,6 +12,10 @@ try:
         url_for)
     from flask_sqlalchemy import SQLAlchemy
 
+    from sqlalchemy.orm import Session
+    from sqlalchemy import create_engine, inspect, func
+    from c_fig import dbkey
+
 except Exception as e:
         print(f'a module(s) have not been imported {e}')
 
@@ -25,7 +29,10 @@ app = Flask(__name__)
 #################################################
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '').replace("://", "ql://", 1) or "postgres://gjijwlitunzqrh:a3722514ebcbdb13b7548855c5794e8205c88e8c18e9fef14b989481433b517b@ec2-54-211-176-156.compute-1.amazonaws.com:5432/da9sl2d3dh1uah"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '').replace("://", "ql://", 1) 
+#or "postgres://gjijwlitunzqrh:a3722514ebcbdb13b7548855c5794e8205c88e8c18e9fef14b989481433b517b@ec2-54-211-176-156.compute-1.amazonaws.com:5432/da9sl2d3dh1uah"
+#"postgresql://postgres:456789123@localhost:5432/sdc_pothole"
+# or "postgres://gjijwlitunzqrh:a3722514ebcbdb13b7548855c5794e8205c88e8c18e9fef14b989481433b517b@ec2-54-211-176-156.compute-1.amazonaws.com:5432/da9sl2d3dh1uah"
 
 #"postgres://gjijwlitunzqrh:a3722514ebcbdb13b7548855c5794e8205c88e8c18e9fef14b989481433b517b@ec2-54-211-176-156.compute-1.amazonaws.com:5432/da9sl2d3dh1uah"
 #os.environ.get('DATABASE_URL', '') 
@@ -35,7 +42,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-Pot = create_classes(db)
+Pothole = create_classes(db)
 
 # create route that renders index.html template
 @app.route("/")
@@ -71,13 +78,15 @@ def project():
     #     status = db.Column(db.strin(50)) 
     #     servicename = db.Column(db.strin(40)) 
 
+
+
 @app.route("/api/pothole_cy")
 def pothole_cy():
     results = db.session.query(Pothole.yearRequest, Pothole.latitude, Pothole.longitude).all()
-    
+    print(results)
     yearRequest = [r[0]  for r in results]
-    latitude    = [r[10] for r in results]
-    longitude   = [r[11] for r in results]
+    latitude    = [r[1] for r in results]
+    longitude   = [r[2] for r in results]
 
     pothole_data = [{
         "year": yearRequest,

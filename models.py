@@ -16,5 +16,5 @@ def create_classes(db):
         longitude    = db.Column(db.Float)
 
         def __repr__(self):
-            return '<Pothole %r>' % (self.name)
+            return '<Pothole %r>' % (self.srvrequestid)
     return Pothole
