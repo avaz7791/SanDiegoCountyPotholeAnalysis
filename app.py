@@ -132,13 +132,13 @@ def sdcpa_data():
 
 @app.route("/api/sdcpa_summarydata")
 def sdcpa_summarydata():
-    sum_pothole_response = db.session.query(SumPotholeData.pksummaryid
-    
-    , SumPotholeData.year_actual, SumPotholeData.quarter_name, SumPotholeData.month_actual ).all()
-#                                            SumPotholeData.month_name, SumPotholeData.status, SumPotholeData.cnt_new, SumPotholeData.cnt_inprogress, SumPotholeData.cnt_closed, SumPotholeData.cnt_referred, \
-#                                            SumPotholeData.total_cnt).all()
-   # sum_weather_response = db.session.query(SumWeatherData.pksummaryid, SumWeatherData.year_actual, SumWeatherData.quarter_name, SumWeatherData.month_actual, \
-   #                                         SumWeatherData.month_name, SumWeatherData.dapr, SumWeatherData.mdpr, SumWeatherData.prcp ).all()
+    sum_pothole_response = db.session.query(SumPotholeData.pksummaryid, \ 
+                                            SumPotholeData.year_actual, SumPotholeData.quarter_name, SumPotholeData.month_actual, \
+                                            SumPotholeData.month_name, SumPotholeData.status, SumPotholeData.cnt_new, SumPotholeData.cnt_inprocess, SumPotholeData.cnt_closed, SumPotholeData.cnt_referred, \
+                                            SumPotholeData.total_cnt).all()
+
+    sum_weather_response = db.session.query(SumWeatherData.pksummaryid, SumWeatherData.year_actual, SumWeatherData.quarter_name, SumWeatherData.month_actual, \
+                                            SumWeatherData.month_name, SumWeatherData.dapr, SumWeatherData.mdpr, SumWeatherData.prcp ).all()
    
     #print(results) SumPotholeData, SumWeatherData
 
@@ -181,4 +181,4 @@ def sdcpa_summarydata():
     return jsonify(sdata)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
