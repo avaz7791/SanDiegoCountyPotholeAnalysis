@@ -111,7 +111,8 @@ def sdcpa_data():
                                             "line": {
                                                 "color": "rgb(8,8,8)",
                                                 "width": 1
-                                          }
+                                },
+                                }
             })
     
     data["potholes_cy"] = pothole_cy_data
