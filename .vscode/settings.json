@@ -1,5 +1,5 @@
 {
     "liveServer.settings.port": 5501,
-    "python.pythonPath": "C:\\Users\\sonof\\anaconda3\\envs\\sdpotholes_env\\python.exe",
+    "python.pythonPath": "C:\\Users\\sonof\\anaconda3\\python.exe",
     "jupyter.jupyterServerType": "local"
 }
