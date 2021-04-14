@@ -27,7 +27,7 @@ var myMap = L.map("mapid", {
   zoom: 11
 });
 
-// Grabbing our GeoJSON data..
+// Grabbing our GeoJSON data..Update File
 d3.json("/api/sdcpa_data").then(function(response) 
 {
   L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
