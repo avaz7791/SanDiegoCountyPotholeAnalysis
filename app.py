@@ -38,7 +38,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-Pothole, Weather, SumPotholeData, SumWeatherData = create_classes(db)
+Pothole, Weather, SumPotholeData = create_classes(db) # , SumWeatherData
 
 # create route that renders index.html template
 @app.route("/")
@@ -135,8 +135,9 @@ def sdcpa_summarydata():
     sum_pothole_response = db.session.query(SumPotholeData.pksummaryid, SumPotholeData.year_actual, SumPotholeData.quarter_name, SumPotholeData.month_actual, \
                                             SumPotholeData.month_name, SumPotholeData.status, SumPotholeData.cnt_new, SumPotholeData.cnt_inprogress, SumPotholeData.cnt_closed, SumPotholeData.cnt_referred, \
                                             SumPotholeData.total_cnt).all()
-    sum_weather_response = db.session.query(SumWeatherData.pksummaryid, SumWeatherData.year_actual, SumWeatherData.quarter_name, SumWeatherData.month_actual, \
-                                            SumWeatherData.month_name, SumWeatherData.dapr, SumWeatherData.mdpr, SumWeatherData.prcp ).all()
+   # sum_weather_response = db.session.query(SumWeatherData.pksummaryid, SumWeatherData.year_actual, SumWeatherData.quarter_name, SumWeatherData.month_actual, \
+   #                                         SumWeatherData.month_name, SumWeatherData.dapr, SumWeatherData.mdpr, SumWeatherData.prcp ).all()
+   
     #print(results) SumPotholeData, SumWeatherData
 
     # All the data in a dictionary
@@ -158,19 +159,19 @@ def sdcpa_summarydata():
                             "total_cnt" : spd[10]})
 
     # Parse summary weather data into a dictionary
-    SummaryWeather_data = []
-    for swd in sum_weather_response:
-        SummaryWeather_data.append({"pksummaryid":swd[0],
-                            "year_actual": swd[1],
-                            "quarter_name": swd[2],
-                            "month_actual"    : swd[3],
-                            "month_name": swd[4],
-                            "dapr": swd[5],
-                            "mdpr": swd[6],
-                            "prcp" : swd[7] })
+    # SummaryWeather_data = []
+    # for swd in sum_weather_response:
+    #     SummaryWeather_data.append({"pksummaryid":swd[0],
+    #                         "year_actual": swd[1],
+    #                         "quarter_name": swd[2],
+    #                         "month_actual"    : swd[3],
+    #                         "month_name": swd[4],
+    #                         "dapr": swd[5],
+    #                         "mdpr": swd[6],
+    #                         "prcp" : swd[7] })
 
     sdata["summary_potholeAnalysis"] = SummaryPothole_data
-    sdata["summary_weatherAnalysis"] = SummaryWeather_data
+   # sdata["summary_weatherAnalysis"] = SummaryWeather_data
 
     return jsonify(sdata)
 
