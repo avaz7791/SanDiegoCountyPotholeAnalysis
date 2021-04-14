@@ -3,7 +3,8 @@ try:
     from models import create_classes
 
     import os
-    import json
+    # import json
+    import requests
     from flask import (
         Flask,
         render_template,
@@ -116,8 +117,10 @@ def sdcpa_data():
             })
 
     # Districts dictionary
-    with open(url_for("static", filename="geojson/council_districts_datasd.geojson")) as f:
-        districts_geojson_dict = json.load(f)
+    districts_geojson_response = requests(url_for("static", filename="geojson/council_districts_datasd.geojson"))
+    districts_geojson_dict = districts_geojson_response.json()
+    # with open(url_for("static", filename="geojson/council_districts_datasd.geojson")) as f:
+    #     districts_geojson_dict = json.load(f)
 
     data["potholes_cy"] = pothole_cy_data
     data["weather_cy"] = weather_cy_data
