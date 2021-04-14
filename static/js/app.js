@@ -104,5 +104,5 @@ d3.json("/council_districts_datasd").then(function(districts_data) {
 
     }
   }).addTo(myMap);
+
 })
-  
