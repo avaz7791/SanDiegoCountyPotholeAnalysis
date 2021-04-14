@@ -39,5 +39,41 @@ def create_classes(db):
         def __repr__(self):
             return '<Weather %r>' % (self.pkid)
 
-         
-    return (Pothole, Weather)
+    class SumPotholeData(db.Model):
+        __tablename__ = 'summary_potholeAnalysis'
+        
+        pksummaryid    = db.Column(db.Integer, primary_key=True)
+        year_actual    = db.Column(db.Integer)
+        quarter_name   = db.Column(db.String(10)) 
+        month_actual   = db.Column(db.Integer)
+        month_name     = db.Column(db.String(5)) 
+        status         = db.Column(db.String(40)) 
+        cnt_new        = db.Column(db.Integer)
+        cnt_inprocess  = db.Column(db.Integer)
+        cnt_closed     = db.Column(db.Integer)
+        cnt_referred   = db.Column(db.Integer)
+        total_cnt      = db.Column(db.Integer)
+        
+        def __repr__(self):
+            return '<SumPotholeData %r>' % (self.pksummaryid)
+
+    class SumWeatherData(db.Model):
+        __tablename__ = 'summary_weatherAnalysis'
+        
+        pksummaryid    = db.Column(db.Integer, primary_key=True)
+        year_actual    = db.Column(db.Integer)
+        quarter_name   = db.Column(db.String(10)) 
+        month_actual   = db.Column(db.Integer)
+        month_name     = db.Column(db.String(5)) 
+        dapr           = db.Column(db.Float)
+        mdpr           = db.Column(db.Float)
+        prcp           = db.Column(db.Float)
+        
+        def __repr__(self):
+            return '<SumWeatherData %r>' % (self.pksummaryid)
+
+
+
+    return (Pothole, Weather, SumPotholeData, SumWeatherData)
+
+
