@@ -78,7 +78,7 @@ function resetPothole(el) {
 // }).addTo(myMap);
 
 // // Use this link to get the geojson data.
-var link = "/council_districts_datasd.geojson";
+var link = "/council_districts_datasd";
 
 function chooseColor(objectid) {
   switch (objectid) {
@@ -232,32 +232,32 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 }).addTo(myMap);
 
 // Store API query variables
-var baseURL = "https://data.cityofnewyork.us/resource/fhrw-4uyv.json?";
-var date = "$where=created_date between'2016-01-01T00:00:00' and '2017-01-01T00:00:00'";
-var complaint = "&complaint_type=Rodent";
-var limit = "&$limit=10000";
+var baseURL = "/api/sdcpa_data";
+
 
 // Assemble API query URL
-var url = baseURL + date + complaint + limit;
+var url = baseURL
 
 // Grab the data with d3
 d3.json(url, function(response) {
 
   // Create a new marker cluster group
   var markers = L.markerClusterGroup();
+  
 
   // Loop through data
-  for (var i = 0; i < response.length; i++) {
+  for (var i = 0; i < response.potholes_cy.length; i++) {
 
     // Set the data location property to a variable
-    var location = response[i].location;
+    var phlocation = [response.potholes_cy[i].latitude, response.potholes_cy[i].longitude]
+    
 
-    // Check for location property
-    if (location) {
+    // Check for location property4
+    if (phlocation) {
 
       // Add a new marker to the cluster group and bind a pop-up
-      markers.addLayer(L.marker([location.coordinates[1], location.coordinates[0]])
-        .bindPopup(response[i].descriptor));
+      markers.addLayer(L.marker([phlocation[0], phlocation[1]])
+         .bindPopup(response.potholes_cy[i].caseagdays))
     }
 
   }
