@@ -127,7 +127,7 @@ def sdcpa_data():
 
     data["potholes_cy"] = pothole_cy_data
     data["weather_cy"] = weather_cy_data
-    data["council_districts_datasd"] = districts_geojson_dict
+  #  data["council_districts_datasd"] = districts_geojson_dict
 
     return jsonify(data)
 
