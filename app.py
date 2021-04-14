@@ -119,11 +119,11 @@ def sdcpa_data():
 
     # Districts dictionary
     with open(url_for("static", filename="geojson/council_districts_datasd.geojson")) as f:
-        districts_geojson_dict = json.load(f)
+        districts_geojson_dict = json.loads(f)
 
     data["potholes_cy"] = pothole_cy_data
     data["weather_cy"] = weather_cy_data
-   # data["council_districts_datasd"] = districts_geojson_dict
+    data["council_districts_datasd"] = districts_geojson_dict
 
     return jsonify(data)
 
