@@ -134,9 +134,9 @@ def sdcpa_data():
 def sdcpa_summarydata():
     sum_pothole_response = db.session.query(SumPotholeData.pksummaryid, SumPotholeData.year_actual, SumPotholeData.quarter_name, SumPotholeData.month_actual, \
                                             SumPotholeData.month_name, SumPotholeData.status, SumPotholeData.cnt_new, SumPotholeData.cnt_inprogress, SumPotholeData.cnt_closed, SumPotholeData.cnt_referred, \
-                                            SumPotholeData.total_cnt,).all()
+                                            SumPotholeData.total_cnt).all()
     sum_weather_response = db.session.query(SumWeatherData.pksummaryid, SumWeatherData.year_actual, SumWeatherData.quarter_name, SumWeatherData.month_actual, \
-                                            SumWeatherData.month_name, SumWeatherData.dapr, SumWeatherData.mdpr, SumWeatherData.prcp, ).all()
+                                            SumWeatherData.month_name, SumWeatherData.dapr, SumWeatherData.mdpr, SumWeatherData.prcp ).all()
     #print(results) SumPotholeData, SumWeatherData
 
     # All the data in a dictionary
