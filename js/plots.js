@@ -50,7 +50,7 @@ var layoutPerYer = {
         tickfont: {color: "rgb(0,0,255)"}
     },
     yaxis2: {
-        title: "Precipitation (?)",
+        title: "Precipitation (Inches)",
         overlaying: "y",
         side: "right",
         titlefont: {color: "rgb(255,0,0)"},
