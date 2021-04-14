@@ -97,6 +97,7 @@ d3.json("/api/sdcpa_data").then(function(response)
       markers.addLayer(L.marker([phlocation[0], phlocation[1]])
          .bindPopup("<h5>Case Age: " + response.potholes_cy[i].caseagedays + "<h5><h5>Coordinates: " 
          + round((response.potholes_cy[i].latitude), 4) + round((response.potholes_cy[i].longitude), 4) + "</h5>"))
+
     }
     
   }
