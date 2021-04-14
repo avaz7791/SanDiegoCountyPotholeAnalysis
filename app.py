@@ -3,6 +3,7 @@ try:
     from models import create_classes
 
     import os
+    import json
     from flask import (
         Flask,
         render_template,
@@ -35,7 +36,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-Pothole, Weather = create_classes(db)
+Pothole, Weather, SumPotholeData, SumWeatherData = create_classes(db)
 
 # create route that renders index.html template
 @app.route("/")
