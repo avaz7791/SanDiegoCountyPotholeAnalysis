@@ -3,7 +3,6 @@ try:
     from models import create_classes
 
     import os
-    # import json
     from flask import (
         Flask,
         render_template,
@@ -62,9 +61,9 @@ def team():
 def project():
     return render_template("project.html")
 
-# @app.route("/council_districts_datasd")
-# def council_districts_datasd():
-#     return redirect()
+@app.route("/council_districts_datasd")
+def council_districts_datasd():
+    return redirect()
 
 @app.route("/api/sdcpa_data")
 def sdcpa_data():
@@ -117,16 +116,9 @@ def sdcpa_data():
                                 }
             })
 
-    # # Districts dictionary
-    # with open(url_for("static", filename="geojson/council_districts_datasd.geojson")) as f:
-    #      districts_geojson_dict = json.loads(f)
-
-    # districts_geojson_response = requests.get(url_for('static', filename='geojson/council_districts_datasd.geojson'))
-    # districts_geojson_dict = districts_geojson_response.json()
 
     data["potholes_cy"] = pothole_cy_data
     data["weather_cy"] = weather_cy_data
-  #  data["council_districts_datasd"] = districts_geojson_dict
 
     return jsonify(data)
 
