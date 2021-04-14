@@ -57,23 +57,23 @@ def create_classes(db):
         def __repr__(self):
             return '<SumPotholeData %r>' % (self.pksummaryid)
 
-    # class SumWeatherData(db.Model):
-    #     __tablename__ = 'summary_weatherAnalysis'
+    class SumWeatherData(db.Model):
+        __tablename__ = 'summary_weatherAnalysis'
         
-    #     pksummaryid    = db.Column(db.Integer, primary_key=True)
-    #     year_actual    = db.Column(db.Integer)
-    #     quarter_name   = db.Column(db.String(10)) 
-    #     month_actual   = db.Column(db.Integer)
-    #     month_name     = db.Column(db.String(5)) 
-    #     dapr           = db.Column(db.Float)
-    #     mdpr           = db.Column(db.Float)
-    #     prcp           = db.Column(db.Float)
+        pksummaryid    = db.Column(db.Integer, primary_key=True)
+        year_actual    = db.Column(db.Integer)
+        quarter_name   = db.Column(db.String(10)) 
+        month_actual   = db.Column(db.Integer)
+        month_name     = db.Column(db.String(5)) 
+        dapr           = db.Column(db.Float)
+        mdpr           = db.Column(db.Float)
+        prcp           = db.Column(db.Float)
         
-    #     def __repr__(self):
-    #         return '<SumWeatherData %r>' % (self.pksummaryid)
+        def __repr__(self):
+            return '<SumWeatherData %r>' % (self.pksummaryid)
 
 
 
-    return (Pothole, Weather, SumPotholeData) #, SumWeatherData)
+    return (Pothole, Weather, SumPotholeData, SumWeatherData)
 
 
