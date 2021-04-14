@@ -1,55 +1,28 @@
-// Amir
 
-// function buildPlot() {
+// // Use this link to get the geojson data.
+var link = "/council_districts_datasd";
 
-//   const url ='/api/pothole_cy';
-//   d3.json(url).then(function(response){
-//       console.log(response);
-
-//       const data = response;
-
-//       const layout = {
-//         scope: "San Diego",
-//         title: "Potholes",
-//         showlegend: false,
-//         height: 600,
-//               // width: 980,
-//         geo: {
-//           scope: "usa",
-//           projection: {
-//             type: "San Diego"
-//           },
-//           showland: true,
-//           landcolor: "rgb(217, 217, 217)",
-//           subunitwidth: 1,
-//           countrywidth: 1,
-//           subunitcolor: "rgb(255,255,255)",
-//           countrycolor: "rgb(255,255,255)"
-//         }
-//       };
-  
-//       Plotly.newPlot("plot", data, layout);
-//   });
-
-// }
-
-
-//Amir
-
-
-
-
-
-
-function focusPothole(el) {
-    // Reset the pothol 
-    id = el.id;
-    // Focus on the chosen pothole in the map
-}
-
-
-function resetPothole(el) {
-    // Resets the pothole layer to unfocus from all the visible potholes
+function chooseColor(objectid) {
+  switch (objectid) {
+  case 1:
+    return "red";
+  case 2:
+    return "orange";
+  case 3:
+    return "yellow";
+  case 4:
+    return "#6f7b0d" //greenish;
+  case 5:
+    return "blue";
+  case 6:
+    return "brown";
+  case 7:
+    return "purple";
+  case 8:
+    return "#fc11ca";
+  default:
+    return "black";
+  }
 }
 
 var myMap = L.map("mapid", {
@@ -57,42 +30,97 @@ var myMap = L.map("mapid", {
   zoom: 11
 });
 
-// Adding tile layer
-L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-  attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
-  tileSize: 512,
-  maxZoom: 18,
-  zoomOffset: -1,
-  id: "mapbox/streets-v11",
-  accessToken: API_KEY
-}).addTo(myMap);
-
 // Grabbing our GeoJSON data..
-d3.json("/council_districts_datasd").then(function(data) {
-  L.geoJSON(data).addTo(myMap);
+d3.json(link).then(function(data) 
+{
+
+  L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+    attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
+    tileSize: 512,
+    maxZoom: 18,
+    zoomOffset: -1,
+    id: "mapbox/streets-v11",
+    accessToken: API_KEY
+  }).addTo(myMap);
+
+  // Creating a geoJSON layer with the retrieved data
+  L.geoJson(data, {
+    style: function(feature) {
+      return {
+        color: "black",
+        fillColor: chooseColor(feature.properties.objectid),
+        fillOpacity: 0.5,
+        weight: 1.5
+      };
+    
+    },
+    // Called on each feature
+    onEachFeature: function(feature, layer) {
+      // Set mouse events to change map styling
+      layer.on({
+        // When a user's mouse touches a map feature, the mouseover event calls this function, that feature's opacity changes to 90% so that it stands out
+        mouseover: function(event) {
+          layer = event.target;
+          layer.setStyle({
+            fillOpacity: 0.9
+          });
+        },
+        // When the cursor no longer hovers over a map feature - when the mouseout event occurs - the feature's opacity reverts back to 50%
+        mouseout: function(event) {
+          layer = event.target;
+          layer.setStyle({
+            fillOpacity: 0.5
+          });
+        },
+        // When a feature (neighborhood) is clicked, it is enlarged to fit the screen
+        click: function(event) {
+          myMap.fitBounds(event.target.getBounds());
+        }
+      });
+      // Giving each feature a pop-up with information pertinent to it
+      layer.bindPopup("<h1>" + feature.properties.district + "</h1> <hr> <h2>" + feature.properties.district + "</h2>");
+
+    }
+  }).addTo(myMap);
 });
 
 
 
+//end border layer--------------------------------------------
 
 
+// Store API query variables
+var baseURL = "/api/sdcpa_data";
 
 
+// Assemble API query URL
+var url = baseURL
 
+// Grab the data with d3
+d3.json(url).then(function(response) {
 
-//var potholejson = "pothole_cy.json";
+  // Create a new marker cluster group
+  var markers = L.markerClusterGroup();
+  
 
-// d3.json(potholejson, function(response) {
+  // Loop through data
+  for (var i = 0; i < response.potholes_cy.length; i++) {
 
-//   console.log(response);
+    // Set the data location property to a variable
+    var phlocation = [response.potholes_cy[i].latitude, response.potholes_cy[i].longitude]
+    
 
-//   for (var i = 0; i < response.length; i++) {
-//     var location = response[i].location;
+    // Check for location property4
+    if (phlocation) {
 
-//     if (location) {
-//       L.marker([location.coordinates[0], location.coordinates[1]]).addTo(myMap);
-//     }
-//   }
+      // Add a new marker to the cluster group and bind a pop-up
+      markers.addLayer(L.marker([phlocation[0], phlocation[1]])
+         .bindPopup(response.potholes_cy[i].caseagdays))
+    }
 
-// });
-//Jeriel--------^
+  }
+
+  // Add our marker cluster layer to the map
+  myMap.addLayer(markers);
+
+});
