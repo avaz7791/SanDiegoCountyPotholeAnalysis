@@ -95,9 +95,9 @@ d3.json("/api/sdcpa_data").then(function(response)
 
       // Add a new marker to the cluster group and bind a pop-up
       markers.addLayer(L.marker([phlocation[0], phlocation[1]])
-         .bindPopup(response.potholes_cy[i].caseagdays))
+         .bindPopup("<h1>" + response.potholes_cy[i].caseagdays + "</h1> <hr> <h2>" + feature.properties.district + "</h2>"))
     }
-
+    
   }
 
   // Add our marker cluster layer to the map
