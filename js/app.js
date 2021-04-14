@@ -78,7 +78,7 @@ function resetPothole(el) {
 // }).addTo(myMap);
 
 // // Use this link to get the geojson data.
-var link = "../geojson/council_districts_datasd.geojson";
+var link = "/council_districts_datasd";
 
 function chooseColor(objectid) {
   switch (objectid) {
