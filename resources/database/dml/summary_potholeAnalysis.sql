@@ -28,5 +28,3 @@ group by
 order by 1	
 	 
 	
-	
-	
