@@ -175,4 +175,4 @@ def sdcpa_summarydata():
     return jsonify(sdata)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
