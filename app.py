@@ -30,7 +30,9 @@ app = Flask(__name__)
 #################################################
 
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '').replace("://", "ql://", 1) or "postgresql://postgres:456789123@localhost:5432/sdc_pothole"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '').replace("://", "ql://", 1) 
+
+# or "postgresql://postgres:456789123@localhost:5432/sdc_pothole"
 # Remove tracking modifications
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -121,7 +123,7 @@ def sdcpa_data():
 
     data["potholes_cy"] = pothole_cy_data
     data["weather_cy"] = weather_cy_data
-    data["council_districts_datasd"] = districts_geojson_dict
+   # data["council_districts_datasd"] = districts_geojson_dict
 
     return jsonify(data)
 
