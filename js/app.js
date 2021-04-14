@@ -232,10 +232,10 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 }).addTo(myMap);
 
 // Store API query variables
-var baseURL = "https://data.cityofnewyork.us/resource/fhrw-4uyv.json?";
-var date = "$where=created_date between'2016-01-01T00:00:00' and '2017-01-01T00:00:00'";
-var complaint = "&complaint_type=Rodent";
-var limit = "&$limit=10000";
+// var baseURL = "https://data.cityofnewyork.us/resource/fhrw-4uyv.json?";
+// var date = "$where=created_date between'2016-01-01T00:00:00' and '2017-01-01T00:00:00'";
+// var complaint = "&complaint_type=Rodent";
+// var limit = "&$limit=10000";
 
 // Assemble API query URL
 var url = baseURL + date + complaint + limit;
