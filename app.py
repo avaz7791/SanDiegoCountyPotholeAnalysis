@@ -37,7 +37,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-Pothole, Weather, SumPotholeData, SumWeatherData = create_classes(db)
+Pothole, Weather, SumPotholeData, SumWeatherData = create_classes(db) 
 
 # create route that renders index.html template
 @app.route("/")
@@ -116,6 +116,7 @@ def sdcpa_data():
                                 }
             })
 
+
     data["potholes_cy"] = pothole_cy_data
     data["weather_cy"] = weather_cy_data
 
@@ -123,11 +124,15 @@ def sdcpa_data():
 
 @app.route("/api/sdcpa_summarydata")
 def sdcpa_summarydata():
-    sum_pothole_response = db.session.query(SumPotholeData.pksummaryid, SumPotholeData.year_actual, SumPotholeData.quarter_name, SumPotholeData.month_actual, \
-                                            SumPotholeData.month_name, SumPotholeData.status, SumPotholeData.cnt_new, SumPotholeData.cnt_inprogress, SumPotholeData.cnt_closed, SumPotholeData.cnt_referred, \
-                                            SumPotholeData.total_cnt,).all()
+    sum_pothole_response = db.session.query(
+                                            SumPotholeData.pksummaryid, SumPotholeData.year_actual, SumPotholeData.quarter_name, \
+                                            SumPotholeData.month_actual, SumPotholeData.month_name, SumPotholeData.status, \
+                                            SumPotholeData.cnt_new, SumPotholeData.cnt_inprocess, SumPotholeData.cnt_closed, \
+                                            SumPotholeData.cnt_referred, SumPotholeData.total_cnt).all()
+
     sum_weather_response = db.session.query(SumWeatherData.pksummaryid, SumWeatherData.year_actual, SumWeatherData.quarter_name, SumWeatherData.month_actual, \
-                                            SumWeatherData.month_name, SumWeatherData.dapr, SumWeatherData.mdpr, SumWeatherData.prcp, ).all()
+                                            SumWeatherData.month_name, SumWeatherData.dapr, SumWeatherData.mdpr, SumWeatherData.prcp ).all()
+   
     #print(results) SumPotholeData, SumWeatherData
 
     # All the data in a dictionary
@@ -136,17 +141,20 @@ def sdcpa_summarydata():
     # Parse summary pothole data into a dictionary
     SummaryPothole_data = []
     for spd in sum_pothole_response:
-        SummaryPothole_data.append({"pksummaryid":spd[0],
+        SummaryPothole_data.append({"pksummaryid":spd[0] ,
+
                             "year_actual": spd[1],
                             "quarter_name": spd[2],
                             "month_actual"    : spd[3],
                             "month_name": spd[4],
                             "status": spd[5],
                             "cnt_new": spd[6],
-                            "cnt_inprogress" : spd[7],
+                            "cnt_inprocess" : spd[7],
                             "cnt_closed": spd[8],
                             "cnt_referred": spd[9],
-                            "total_cnt" : spd[10]})
+                            "total_cnt" : spd[10]
+                            
+                            })
 
     # Parse summary weather data into a dictionary
     SummaryWeather_data = []
