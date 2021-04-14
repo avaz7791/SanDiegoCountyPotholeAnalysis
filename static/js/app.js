@@ -1,7 +1,4 @@
 
-// // Use this link to get the geojson data.
-var link = "/council_districts_datasd";
-
 function chooseColor(objectid) {
   switch (objectid) {
   case 1:
@@ -31,9 +28,8 @@ var myMap = L.map("mapid", {
 });
 
 // Grabbing our GeoJSON data..
-d3.json(link).then(function(data) 
+d3.json("/api/sdcpa_data").then(function(response) 
 {
-
   L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
     tileSize: 512,
@@ -43,8 +39,9 @@ d3.json(link).then(function(data)
     accessToken: API_KEY
   }).addTo(myMap);
 
+  districts_data = response.council_districts_datasd
   // Creating a geoJSON layer with the retrieved data
-  L.geoJson(data, {
+  L.geoJson(districts_data, {
     style: function(feature) {
       return {
         color: "black",
@@ -82,26 +79,9 @@ d3.json(link).then(function(data)
 
     }
   }).addTo(myMap);
-});
-
-
-
-//end border layer--------------------------------------------
-
-
-// Store API query variables
-var baseURL = "/api/sdcpa_data";
-
-
-// Assemble API query URL
-var url = baseURL
-
-// Grab the data with d3
-d3.json(url).then(function(response) {
 
   // Create a new marker cluster group
   var markers = L.markerClusterGroup();
-  
 
   // Loop through data
   for (var i = 0; i < response.potholes_cy.length; i++) {
@@ -122,5 +102,4 @@ d3.json(url).then(function(response) {
 
   // Add our marker cluster layer to the map
   myMap.addLayer(markers);
-
 });
