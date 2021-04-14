@@ -99,7 +99,7 @@ def sdcpa_data():
         weather_cy_data.append({"ID":weather[0],
                                 "daterequest": weather[1],
                                 "station": weather[2],
-                                "name": weather[3]
+                                "name": weather[3],
                                 "latitude": weather[4],
                                 "longitude": weather[5],
                                 "monthrequest": weather[6],

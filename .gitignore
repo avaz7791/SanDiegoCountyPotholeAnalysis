@@ -136,3 +136,4 @@ dmypy.json
 .vscode/settings.json
 src/log.txt
 resources/scripts/log.txt
+.vscode/settings.json
