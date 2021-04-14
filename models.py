@@ -39,7 +39,5 @@ def create_classes(db):
         def __repr__(self):
             return '<Weather %r>' % (self.pkid)
 
-    class SummaryWeather(db.model):
-        __tablename__ = 'summary_weather'
-        
+         
     return (Pothole, Weather)
