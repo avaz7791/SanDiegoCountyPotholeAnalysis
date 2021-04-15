@@ -15,6 +15,9 @@ var idLst = [];
 
 // Read from d3.json
 d3.json("/api/sdcpa_data").then(function(data) {
+    // Parse all dates into %YYY-MM-DD format
+    ///////////////////////////////////////////
+    ///////////////////////////////////////////
     minFilterDate = data.minFilterDate;
     maxFilterDate = data.maxFilterDate;
     dateLst = data.uniqueDateList;
