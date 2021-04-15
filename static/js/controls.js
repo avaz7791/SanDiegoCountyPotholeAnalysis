@@ -4,15 +4,22 @@
  * Here, I'm using sample values to prepare the html files
  * and the javascript accordingly.
  */
+var minFilterDate;
+var maxFilterDate;
+var dateLst = [];
+var idLst = [];
+// var cityList = ["San Diego", "Clairemont", "La Jolla"]
+
+
 
 
 // Read from d3.json
 d3.json("/api/sdcpa_data").then(function(data) {
-    var minFilterDate = data.minFilterDate;
-    var maxFilterDate = data.maxFilterDate;
-    var dateLst = data.uniqueDateList;
-    var monthLst = data.uniqueMonthList;
-    var serviceIDLst = data.uniqueServiceIDList;
+    minFilterDate = data.minFilterDate;
+    maxFilterDate = data.maxFilterDate;
+    dateLst = data.uniqueDateList;
+    // var monthLst = data.uniqueMonthList;
+    idLst = data.uniqueServiceIDList;
 
     // set min and max date value for filters
     var fromDatePicker = d3.select("#fromMonth");
@@ -29,10 +36,33 @@ d3.json("/api/sdcpa_data").then(function(data) {
     filterForm.on("submit", filterData);
     filterButton.on("click", filterData);
 
-    resetData(minFilterDate, maxFilterDate, dateLst);
+    resetData(minFilterDate, maxFilterDate);
 })
 
-
+function resetData(minDate, maxDate) {
+    var filteredDates = [];
+        var filteredIDs = [];
+        var filteredList = d3.select("#filteredList");
+        // Clear the list
+        filteredList.html("")
+        for (var dix = 0; (dix<dateLst.length && dix<100); dix++) {
+            date = dateLst[dix];
+            id = idLst[dix];
+            // filter dates
+            if (date >= minDate && date <= maxDate) {
+                filteredDates.push(date);
+                filteredIDs.push(id);
+                // Append to the list
+                filteredList.append("li")
+                            .attr("class", "list-group-item list-group-item-action")
+                            .attr("id", id)
+                            .attr("data-toggle", "list")
+                            .attr("role", "tab")
+                            .on("click", focusPothole(+id))
+                            .text(date)
+            }
+        }
+}
 
 // var minFilterDate = "2021-01-01";
 // var maxFilterDate = "2021-03-10";
@@ -57,29 +87,6 @@ d3.json("/api/sdcpa_data").then(function(data) {
 
 // resetData(minFilterDate, maxFilterDate, dateLst); 
 
-function resetData(minDate, maxDate, dateLst) {
-    var filteredDates = [];
-        var filteredIDs = [];
-        var filteredList = d3.select("#filteredList");
-        // Clear the list
-        filteredList.html("")
-        for (var dix = 0; (dix<dateLst.length && dix<100); dix++) {
-            date = dateLst[dix];
-            id = idLst[dix];
-            // filter dates
-            if (date >= minDate && date <= maxDate) {
-                filteredDates.push(date);
-                filteredIDs.push(id);
-                // Append to the list
-                filteredList.append("li")
-                            .attr("class", "list-group-item list-group-item-action")
-                            .attr("id", id)
-                            .attr("data-toggle", "list")
-                            .attr("role", "tab")
-                            .text(date)
-            }
-        }
-}
 
 function filterData() {
     // d3.event.preventDefault();
