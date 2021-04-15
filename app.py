@@ -3,6 +3,7 @@ try:
     from models import create_classes
 
     import os
+    import datetime
     from flask import (
         Flask,
         render_template,
@@ -84,14 +85,16 @@ def sdcpa_data():
     unique_date_request = set()
     unique_service_id = set()
     for pothole in pothole_response:
+        datetime_request_obj = datetime.datetime(pothole[4], "%a, %d %b %Y %H:%M:%S %Z")
+        datetime_closed_obj = datetime.datetime(pothole[7], "%a, %d %b %Y %H:%M:%S %Z")
         pothole_cy_data.append({"srvrequestid":pothole[0],
                             "latitude": pothole[1],
                             "longitude": pothole[2],
                             "status"    : pothole[3],
-                            "daterequest": pothole[4],
-                            "monthrequest": pothole[5],
-                            "monthclosed": pothole[6],
-                            "dateclosed" : pothole[7],
+                            "daterequest": datetime_request_obj.strftime("%Y-%m-%d"),
+                            "monthrequest": datetime_request_obj.strftime("%B"),
+                            "monthclosed": datetime_closed_obj.strftime("%B"),
+                            "dateclosed" : datetime_closed_obj.strftime("%Y-%m-%d"),
                             "caseagedays": pothole[8],
                             "servicename": pothole[9],
                             "district" : pothole[10]})
@@ -105,6 +108,9 @@ def sdcpa_data():
     data["minFilterDate"] = min(unique_date_request)
     data["maxFilterDate"] = max(unique_date_request)
     data["uniqueServiceIDList"] = list(unique_service_id)
+
+    
+    "maxFilterDate":"Sun, 28 Mar 2021 00:00:00 GMT","minFilterDate":"Mon, 04 Jan 2021 00:00:00 GMT"
 
     # Weather.dapr,
     #print(results)
