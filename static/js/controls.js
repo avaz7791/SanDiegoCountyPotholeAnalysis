@@ -11,15 +11,23 @@ var idLst = [];
 // var cityList = ["San Diego", "Clairemont", "La Jolla"]
 
 
-
+function utcToISODate(str) {
+    d = new Date(str);
+    return d.toISOString().slice(0,10);
+}
 
 // Read from d3.json
 d3.json("/api/sdcpa_data").then(function(data) {
     // Parse all dates into %YYY-MM-DD format
     ///////////////////////////////////////////
     ///////////////////////////////////////////
-    minFilterDate = data.minFilterDate;
-    maxFilterDate = data.maxFilterDate;
+    minFilterDate = utcToISODate(data.minFilterDate);
+    maxFilterDate = utcToISODate(data.maxFilterDate);
+    dateLst = [];
+    for (var dix in )
+    data.uniqueDateList.forEach(function(datestr) {
+        dateLst.push(utcToISODate(datestr))
+    });
     dateLst = data.uniqueDateList;
     // var monthLst = data.uniqueMonthList;
     idLst = data.uniqueServiceIDList;
