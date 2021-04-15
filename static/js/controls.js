@@ -24,10 +24,10 @@ d3.json("/api/sdcpa_data").then(function(data) {
 
     var minFilterDate = utcToISODate(data.minFilterDate);
     var maxFilterDate = utcToISODate(data.maxFilterDate);
-    data.potholes_cy.forEach(pothole => {
+    data.potholes_cy.forEach(function(pothole) {
         potholes.push({
             "id": pothole.srvrequestid,
-            "date": pothole.daterequest,
+            "date": utcToISODate(pothole.daterequest),
             "age": pothole.caseagedays,
             "latitude": pothole.latitude,
             "longitude": pothole.longitude,
@@ -35,7 +35,7 @@ d3.json("/api/sdcpa_data").then(function(data) {
         });
     });
     // var monthLst = data.uniqueMonthList;
-    idLst = data.uniqueServiceIDList;
+    // idLst = data.uniqueServiceIDList;
 
         // set min and max date value for filters
     
@@ -57,14 +57,13 @@ function resetData(minDate, maxDate, potholes) {
     filteredPotholes = [];
     // Clear the list
     d3.select("#filteredList").html("")
-    for (var dix = 0; (dix<potholes.length && dix<100); dix++) {
+    for (var dix = 0; (dix<potholes.length); dix++) {
         date = potholes[dix].date;
         id = potholes[dix].id;
         // filter dates
         if (date >= minDate && 
                 date <= maxDate) {
-            filteredPotholes.push({"date": date,
-                                   "id": id});
+            filteredPotholes.push(potholes[dix]);
             // Append to the list
             d3.select("#filteredList").append("li")
                         .attr("class", "list-group-item list-group-item-action")
@@ -75,7 +74,7 @@ function resetData(minDate, maxDate, potholes) {
         }
     }
 
-    return filteredPotholes;
+    // return filteredPotholes;
 }
 
 
