@@ -46,6 +46,7 @@ d3.json("/api/sdcpa_data").then(function(data) {
                 .attr("max", maxFilterDate);
     
     resetData(minFilterDate, maxFilterDate);
+    addMarkers(potholes)
 });
 
 // var filteredDates = [];
@@ -82,7 +83,7 @@ function resetData(minDate, maxDate) {
         }
     }
 
-    addMarkers();
+    addMarkers(filteredPotholes);
 }
 
 
@@ -142,7 +143,7 @@ function chooseColor(objectid) {
     }
   }
   
-function addMarkers() {
+function addMarkers(filteredPotholes) {
     var myMap = L.map("mapid", {
         center: [32.7157, -117.1611],
         zoom: 11
@@ -171,7 +172,7 @@ function addMarkers() {
         
       
         // Check for location property4
-        if (phlocation) {
+       {
       
           // Add a new marker to the cluster group and bind a pop-up
           markers.addLayer(L.marker([phlocation[0], phlocation[1]])
