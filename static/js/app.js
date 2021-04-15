@@ -39,7 +39,32 @@ d3.json("/api/sdcpa_data").then(function(response)
     accessToken: API_KEY
   }).addTo(myMap);
 
-  districts_data = response.council_districts_datasd
+  // Create a new marker cluster group
+  var markers = L.markerClusterGroup();
+
+  // Loop through data
+  for (var i = 0; i < response.potholes_cy.length; i++) {
+
+    // Set the data location property to a variable
+    var phlocation = [response.potholes_cy[i].latitude, response.potholes_cy[i].longitude]
+    
+
+    // Check for location property4
+    if (phlocation) {
+
+      // Add a new marker to the cluster group and bind a pop-up
+      markers.addLayer(L.marker([phlocation[0], phlocation[1]])
+         .bindPopup("<h3>" + "TEST" + 24 + "</h3><h5>" + response.potholes_cy[i].latitude + "</h5>"))
+    }
+    
+  }
+
+  // Add our marker cluster layer to the map
+  myMap.addLayer(markers);
+});
+
+// districts_data = response.council_districts_datasd
+d3.json("/council_districts_datasd").then(function(districts_data) {
   // Creating a geoJSON layer with the retrieved data
   L.geoJson(districts_data, {
     style: function(feature) {
@@ -79,6 +104,7 @@ d3.json("/api/sdcpa_data").then(function(response)
 
     }
   }).addTo(myMap);
+
 
   // Create a new marker cluster group
   var markers = L.markerClusterGroup();

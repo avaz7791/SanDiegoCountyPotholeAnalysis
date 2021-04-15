@@ -63,7 +63,7 @@ def project():
 
 @app.route("/council_districts_datasd")
 def council_districts_datasd():
-    return redirect()
+    return redirect(url_for('static', filename='geojson/council_districts_datasd.geojson'))
 
 @app.route("/api/sdcpa_data")
 def sdcpa_data():
