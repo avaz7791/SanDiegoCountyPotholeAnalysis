@@ -27,7 +27,6 @@ d3.json("/api/sdcpa_data").then(function(data) {
     data.uniqueDateList.forEach(function(datestr) {
         dateLst.push(utcToISODate(datestr))
     });
-    dateLst = data.uniqueDateList;
     // var monthLst = data.uniqueMonthList;
     idLst = data.uniqueServiceIDList;
 
