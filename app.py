@@ -91,15 +91,21 @@ def sdcpa_data():
                             "latitude": pothole[1],
                             "longitude": pothole[2],
                             "status"    : pothole[3],
-                            "daterequest": datetime_request_obj.strftime("%Y-%m-%d"),
-                            "monthrequest": datetime_request_obj.strftime("%B"),
-                            "monthclosed": datetime_closed_obj.strftime("%B"),
-                            "dateclosed" : datetime_closed_obj.strftime("%Y-%m-%d"),
+                            "daterequest": pothole[4],
+                            "monthrequest": pothole[5],
+                            "monthclosed": pothole[6],
+                            "dateclosed" : pothole[7],
+                            # "daterequest": datetime_request_obj.strftime("%Y-%m-%d"),
+                            # "monthrequest": datetime_request_obj.strftime("%B"),
+                            # "monthclosed": datetime_closed_obj.strftime("%B"),
+                            # "dateclosed" : datetime_closed_obj.strftime("%Y-%m-%d"),
                             "caseagedays": pothole[8],
                             "servicename": pothole[9],
                             "district" : pothole[10]})
-        unique_month_request.add(datetime_request_obj.strftime("%B"))
-        unique_date_request.add(datetime_request_obj.strftime("%Y-%m-%d"))
+        # unique_month_request.add(datetime_request_obj.strftime("%B"))
+        # unique_date_request.add(datetime_request_obj.strftime("%Y-%m-%d"))
+        unique_month_request.add(pothole[5])
+        unique_date_request.add(pothole[4])
         unique_service_id.add(pothole[0])
 
     # Extra features for filtering
