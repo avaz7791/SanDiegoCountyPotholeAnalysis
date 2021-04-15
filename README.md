@@ -1,4 +1,4 @@
-# SanDiegoCountyPotholeAnalysis
+# City of San Diego  Pothole Analysis
 # Premise:
 In 2015 the City of San Diego (the City) began a concerted effort to repave and repair streets that had been neglected for decades. Potholes are reported at a near-steady state during dry weather, but pothole reports will increase during the rainy season or years when there is above average precipitation. 
 # Goal:
