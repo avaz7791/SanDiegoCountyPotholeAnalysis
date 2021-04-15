@@ -88,12 +88,12 @@ def sdcpa_data():
     for pothole in pothole_response:
         date_request_str = pothole[4]
         if date_request_str != "":
-            datetime_request_obj = datetime.datetime(pothole[4], "%a, %d %b %Y %H:%M:%S %Z")
+            datetime_request_obj = datetime.datetime.strptime(pothole[4], "%a, %d %b %Y %H:%M:%S %Z")
         else:
             datetime_request_obj = datetime.datetime.now()
         date_closed_str = pothole[7]
         if date_closed_str != "":
-            datetime_closed_obj = datetime.datetime(pothole[7], "%a, %d %b %Y %H:%M:%S %Z")
+            datetime_closed_obj = datetime.datetime.strptime(pothole[7], "%a, %d %b %Y %H:%M:%S %Z")
         else:
             datetime_closed_obj = datetime.datetime.now()
         pothole_cy_data.append({"srvrequestid":pothole[0],

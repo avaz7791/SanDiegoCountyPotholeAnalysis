@@ -22,8 +22,8 @@ d3.json("/api/sdcpa_data").then(function(data) {
     idLst = data.uniqueServiceIDList;
 
     // set min and max date value for filters
-    var fromDatePicker = d3.select("#fromMonth");
-    var toDatePicker = d3.select("#toMonth");
+    var fromDatePicker = d3.select("#fromDate");
+    var toDatePicker = d3.select("#toDate");
 
     fromDatePicker.attr("min", minFilterDate)
                 .attr("max", maxFilterDate);
@@ -63,34 +63,11 @@ function resetData(minDate, maxDate) {
         }
 }
 
-// var minFilterDate = "2021-01-01";
-// var maxFilterDate = "2021-03-10";
-// var dateLst = ["2021-01-15", "2021-03-10", "2021-02-14", "2021-02-10"];
-// var idLst = ["1000", "2000", "3000", "4000"]
-// var cityList = ["San Diego", "Clairemont", "La Jolla"]
-
-// // set min and max date value for filters
-// var fromDatePicker = d3.select("#fromMonth");
-// var toDatePicker = d3.select("#toMonth");
-
-// fromDatePicker.attr("min", minFilterDate)
-//               .attr("max", maxFilterDate);
-// toDatePicker.attr("min", minFilterDate)
-//             .attr("max", maxFilterDate);
-
-// var filterForm = d3.select("#filter-form");
-// var filterButton = d3.select("#filter-button");
-
-// filterForm.on("submit", filterData);
-// filterButton.on("click", filterData);
-
-// resetData(minFilterDate, maxFilterDate, dateLst); 
-
 
 function filterData() {
     // d3.event.preventDefault();
     // select summary text and make it read
-    var formHelp = d3.select("#monthRangeHelp");
+    var formHelp = d3.select("#dateRangeHelp");
     var isDatesOk = checkFromToDates(formHelp);
     var minDate = fromDatePicker.property("value");
     var maxDate = toDatePicker.property("value");
