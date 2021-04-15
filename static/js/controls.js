@@ -24,7 +24,6 @@ d3.json("/api/sdcpa_data").then(function(data) {
     minFilterDate = utcToISODate(data.minFilterDate);
     maxFilterDate = utcToISODate(data.maxFilterDate);
     dateLst = [];
-    for (var dix in )
     data.uniqueDateList.forEach(function(datestr) {
         dateLst.push(utcToISODate(datestr))
     });
