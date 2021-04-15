@@ -7,36 +7,63 @@
 
 
 // Read from d3.json
-var minFilterDate = "2021-01-01";
-var maxFilterDate = "2021-03-10";
-var dateLst = ["2021-01-15", "2021-03-10", "2021-02-14", "2021-02-10"];
-var idLst = ["1000", "2000", "3000", "4000"]
-var cityList = ["San Diego", "Clairemont", "La Jolla"]
+d3.json("/api/sdcpa_data").then(function(data) {
+    var minFilterDate = data.minFilterDate;
+    var maxFilterDate = data.maxFilterDate;
+    var dateLst = data.uniqueDateList;
+    var monthLst = data.uniqueMonthList;
+    var serviceIDLst = data.uniqueServiceIDList;
 
-// set min and max date value for filters
-var fromDatePicker = d3.select("#fromMonth");
-var toDatePicker = d3.select("#toMonth");
+    // set min and max date value for filters
+    var fromDatePicker = d3.select("#fromMonth");
+    var toDatePicker = d3.select("#toMonth");
 
-fromDatePicker.attr("min", minFilterDate)
-              .attr("max", maxFilterDate);
-toDatePicker.attr("min", minFilterDate)
-            .attr("max", maxFilterDate);
+    fromDatePicker.attr("min", minFilterDate)
+                .attr("max", maxFilterDate);
+    toDatePicker.attr("min", minFilterDate)
+                .attr("max", maxFilterDate);
 
-var filterForm = d3.select("#filter-form");
-var filterButton = d3.select("#filter-button");
+    var filterForm = d3.select("#filter-form");
+    var filterButton = d3.select("#filter-button");
 
-filterForm.on("submit", filterData);
-filterButton.on("click", filterData);
+    filterForm.on("submit", filterData);
+    filterButton.on("click", filterData);
 
-resetData(minFilterDate, maxFilterDate); 
+    resetData(minFilterDate, maxFilterDate, dateLst);
+})
 
-function resetData(minDate, maxDate) {
+
+
+// var minFilterDate = "2021-01-01";
+// var maxFilterDate = "2021-03-10";
+// var dateLst = ["2021-01-15", "2021-03-10", "2021-02-14", "2021-02-10"];
+// var idLst = ["1000", "2000", "3000", "4000"]
+// var cityList = ["San Diego", "Clairemont", "La Jolla"]
+
+// // set min and max date value for filters
+// var fromDatePicker = d3.select("#fromMonth");
+// var toDatePicker = d3.select("#toMonth");
+
+// fromDatePicker.attr("min", minFilterDate)
+//               .attr("max", maxFilterDate);
+// toDatePicker.attr("min", minFilterDate)
+//             .attr("max", maxFilterDate);
+
+// var filterForm = d3.select("#filter-form");
+// var filterButton = d3.select("#filter-button");
+
+// filterForm.on("submit", filterData);
+// filterButton.on("click", filterData);
+
+// resetData(minFilterDate, maxFilterDate, dateLst); 
+
+function resetData(minDate, maxDate, dateLst) {
     var filteredDates = [];
         var filteredIDs = [];
         var filteredList = d3.select("#filteredList");
         // Clear the list
         filteredList.html("")
-        for (var dix = 0; dix<dateLst.length; dix++) {
+        for (var dix = 0; (dix<dateLst.length && dix<100); dix++) {
             date = dateLst[dix];
             id = idLst[dix];
             // filter dates

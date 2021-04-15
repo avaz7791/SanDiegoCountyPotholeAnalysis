@@ -80,6 +80,9 @@ def sdcpa_data():
 
     # Parse pothole data into a dictionary
     pothole_cy_data = []
+    unique_month_request = set()
+    unique_date_request = set()
+    unique_service_id = set()
     for pothole in pothole_response:
         pothole_cy_data.append({"srvrequestid":pothole[0],
                             "latitude": pothole[1],
@@ -92,6 +95,16 @@ def sdcpa_data():
                             "caseagedays": pothole[8],
                             "servicename": pothole[9],
                             "district" : pothole[10]})
+        unique_month_request.add(pothole[5])
+        unique_date_request.add(pothole[4])
+        unique_service_id.add(pothole[0])
+
+    # Extra features for filtering
+    data["uniqueDateList"] = list(unique_date_request)
+    data["uniqueMonthList"] = list(unique_month_request)
+    data["minFilterDate"] = min(unique_date_request)
+    data["maxFilterDate"] = max(unique_date_request)
+    data["uniqueServiceIDList"] = list(unique_service_id)
 
     # Weather.dapr,
     #print(results)
