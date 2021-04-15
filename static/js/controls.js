@@ -14,6 +14,7 @@ function utcToISODate(str) {
 }
 
 var potholes = [];
+var filteredPotholes = []
 
 // Read from d3.json
 d3.json("/api/sdcpa_data").then(function(data) {
@@ -44,7 +45,7 @@ d3.json("/api/sdcpa_data").then(function(data) {
     d3.select("#toDate").attr("min", minFilterDate)
                 .attr("max", maxFilterDate);
     
-    resetData(minFilterDate, maxFilterDate, potholes);
+    resetData(minFilterDate, maxFilterDate);
 });
 
 // var filteredDates = [];
@@ -53,7 +54,7 @@ d3.select("#filter-form").on("submit", filterData);
 d3.select("#filter-button").on("click", filterData);
 
 
-function resetData(minDate, maxDate, potholes) {
+function resetData(minDate, maxDate) {
     filteredPotholes = [];
     // Clear the list
     d3.select("#filteredList").html("")
@@ -65,23 +66,29 @@ function resetData(minDate, maxDate, potholes) {
                 date <= maxDate) {
             filteredPotholes.push(potholes[dix]);
             // Append to the list
-            d3.select("#filteredList").append("li")
-                        .attr("class", "list-group-item list-group-item-action")
-                        .attr("id", id)
-                        .attr("data-toggle", "list")
-                        .attr("role", "tab")
-                        .text(date)
+            if (dix < 100) {
+                d3.select("#filteredList").append("li")
+                    .attr("class", "list-group-item list-group-item-action")
+                    .attr("id", id)
+                    .attr("data-toggle", "list")
+                    .attr("role", "tab")
+                    .text(
+                        "<h5>Service ID: " + filteredPothole.srvrequestid +
+                        "<h5><h5>Status: " + filteredPothole.status + 
+                        "<h5><h5>Date Requested: " + filteredPothole.daterequest +
+                        "<h5><h5>Case Age: " + filteredPothole.caseagedays
+                        );
+            }
+            
         }
     }
-
-    // return filteredPotholes;
 }
 
 
 function filterData() {
     // d3.event.preventDefault();
     // select summary text and make it read
-    var isDatesOk = checkFromToDates(d3.select("#dateRangeHelp"));
+    var isDatesOk = checkFromToDates();
     var minDate = d3.select("#fromDate").property("value");
     var maxDate = d3.select("#toDate").property("value");
 
@@ -91,22 +98,22 @@ function filterData() {
     else {console.log("Choose correct range");}
 }
 
-function checkFromToDates(formHelp) {
+function checkFromToDates() {
     // Check for range
     if (d3.select("#fromDate").property("value") > d3.select("#toDate").property("value")) {
-        formHelp.text("From: cannot be larger than To:")
+        d3.select("#dateRangeHelp").text("From: cannot be larger than To:")
                 .attr("class", "form-text text-danger error");
         return false;
     }
     // Check for null
     else if (d3.select("#fromDate").property("value") == "" || 
         d3.select("#toDate").property("value") == "") {
-        formHelp.text("Choose a valid date")
+            d3.select("#dateRangeHelp").text("Choose a valid date")
             .attr("class", "form-text text-danger error");
         return false;
     }
     // Default value
-    formHelp.text("").attr("class", "form-text text-mute");
+    d3.select("#dateRangeHelp").text("").attr("class", "form-text text-mute");
     return true;
 }
 
