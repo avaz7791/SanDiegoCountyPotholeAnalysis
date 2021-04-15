@@ -27,7 +27,7 @@ d3.json("/api/sdcpa_data").then(function(data) {
     data.potholes_cy.forEach(pothole => {
         potholes.push({
             "id": pothole.srvrequestid,
-            "date": pothole.datarequest,
+            "date": pothole.daterequest,
             "age": pothole.caseagedays,
             "latitude": pothole.latitude,
             "longitude": pothole.longitude,
