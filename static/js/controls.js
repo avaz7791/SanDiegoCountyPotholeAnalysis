@@ -23,7 +23,6 @@ d3.json("/api/sdcpa_data").then(function(data) {
     ///////////////////////////////////////////
     minFilterDate = utcToISODate(data.minFilterDate);
     maxFilterDate = utcToISODate(data.maxFilterDate);
-    dateLst = [];
     data.uniqueDateList.forEach(function(datestr) {
         dateLst.push(utcToISODate(datestr))
     });
@@ -36,14 +35,15 @@ d3.json("/api/sdcpa_data").then(function(data) {
                 .attr("max", maxFilterDate);
     d3.select("#toDate").attr("min", minFilterDate)
                 .attr("max", maxFilterDate);
+    
+    resetData(minFilterDate, maxFilterDate);
 });
-
-d3.select("#filter-form").on("submit", filterData);
-d3.select("#filter-button").on("click", filterData);
 
 var filteredDates = [];
 var filteredIDs = [];
-resetData(minFilterDate, maxFilterDate);
+d3.select("#filter-form").on("submit", filterData);
+d3.select("#filter-button").on("click", filterData);
+
 
 function resetData(minDate, maxDate) {
     filteredDates = [];
@@ -54,8 +54,8 @@ function resetData(minDate, maxDate) {
         date = dateLst[dix];
         id = idLst[dix];
         // filter dates
-        if (date >= d3.select("#fromDate").property("value") && 
-                date <= d3.select("#toDate").property("value")) {
+        if (date >= minDate && 
+                date <= maxDate) {
             filteredDates.push(date);
             filteredIDs.push(id);
             // Append to the list
