@@ -87,27 +87,27 @@ def sdcpa_data():
     unique_service_id = set()
     for pothole in pothole_response:
         date_request_str = pothole[4]
-        if date_request_str != "":
-            datetime_request_obj = datetime.datetime.strptime(pothole[4], "%a, %d %b %Y %H:%M:%S %Z")
-        else:
-            datetime_request_obj = datetime.datetime.now()
+        # if date_request_str != "":
+        datetime_request_obj = datetime.datetime.strptime(date_request_str, "%a, %d %b %Y %H:%M:%S %Z")
+        # else:
+            # datetime_request_obj = datetime.datetime.now()
         date_closed_str = pothole[7]
-        if date_closed_str != "":
-            datetime_closed_obj = datetime.datetime.strptime(pothole[7], "%a, %d %b %Y %H:%M:%S %Z")
-        else:
-            datetime_closed_obj = datetime.datetime.now()
+        # if date_closed_str != "":
+        #     datetime_closed_obj = datetime.datetime.strptime(pothole[7], "%a, %d %b %Y %H:%M:%S %Z")
+        # else:
+        #     datetime_closed_obj = datetime.datetime.now()
         pothole_cy_data.append({"srvrequestid":pothole[0],
                             "latitude": pothole[1],
                             "longitude": pothole[2],
                             "status"    : pothole[3],
                             # "daterequest": pothole[4],
                             # "monthrequest": pothole[5],
-                            # "monthclosed": pothole[6],
-                            # "dateclosed" : pothole[7],
+                            "monthclosed": pothole[6],
+                            "dateclosed" : pothole[7],
                             "daterequest": datetime_request_obj.strftime("%Y-%m-%d"),
                             "monthrequest": datetime_request_obj.strftime("%B"),
-                            "monthclosed": datetime_closed_obj.strftime("%B"),
-                            "dateclosed" : datetime_closed_obj.strftime("%Y-%m-%d"),
+                            # "monthclosed": datetime_closed_obj.strftime("%B"),
+                            # "dateclosed" : datetime_closed_obj.strftime("%Y-%m-%d"),
                             "caseagedays": pothole[8],
                             "servicename": pothole[9],
                             "district" : pothole[10]})
