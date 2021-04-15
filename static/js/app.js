@@ -54,7 +54,12 @@ d3.json("/api/sdcpa_data").then(function(response)
 
       // Add a new marker to the cluster group and bind a pop-up
       markers.addLayer(L.marker([phlocation[0], phlocation[1]])
-         .bindPopup("<h3>" + "TEST" + 24 + "</h3><h5>" + response.potholes_cy[i].latitude + "</h5>"))
+         .bindPopup("<h5>Service ID: " + response.potholes_cy[i].srvrequestid +
+          "<h5><h5>Status: " + response.potholes_cy[i].status + 
+          "<h5><h5>Date Requested: " + response.potholes_cy[i].daterequest +
+          "<h5><h5>Case Age: " + response.potholes_cy[i].caseagedays + 
+          "<h5><h5>Coordinates: " + response.potholes_cy[i].latitude + ", " + response.potholes_cy[i].longitude + "</h5>"))
+
     }
     
   }
@@ -104,33 +109,4 @@ d3.json("/council_districts_datasd").then(function(response) {
 
     }
   }).addTo(myMap);
-
-
-  // Create a new marker cluster group
-  var markers = L.markerClusterGroup();
-
-  // Loop through data
-  for (var i = 0; i < response.potholes_cy.length; i++) {
-
-    // Set the data location property to a variable
-    var phlocation = [response.potholes_cy[i].latitude, response.potholes_cy[i].longitude]
-    
-
-    // Check for location property4
-    if (phlocation) {
-
-      // Add a new marker to the cluster group and bind a pop-up
-      markers.addLayer(L.marker([phlocation[0], phlocation[1]])
-         .bindPopup("<h5>Service ID: " + response.potholes_cy[i].srvrequestid +
-          "<h5><h5>Status: " + response.potholes_cy[i].status + 
-          "<h5><h5>Date Requested: " + response.potholes_cy[i].daterequest +
-          "<h5><h5>Case Age: " + response.potholes_cy[i].caseagedays + 
-          "<h5><h5>Coordinates: " + response.potholes_cy[i].latitude + ", " + response.potholes_cy[i].longitude + "</h5>"))
-
-    }
-    
-  }
-
-  // Add our marker cluster layer to the map
-  myMap.addLayer(markers);
 });
