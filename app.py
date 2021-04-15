@@ -83,10 +83,11 @@ def sdcpa_data():
     pothole_cy_data = []
     unique_month_request = set()
     unique_date_request = set()
+    unique_date_closed = set()
     unique_service_id = set()
     for pothole in pothole_response:
-        datetime_request_obj = datetime.datetime(pothole[4], "%a, %d %b %Y %H:%M:%S %Z")
-        datetime_closed_obj = datetime.datetime(pothole[7], "%a, %d %b %Y %H:%M:%S %Z")
+        # datetime_request_obj = datetime.datetime(pothole[4], "%a, %d %b %Y %H:%M:%S %Z")
+        # datetime_closed_obj = datetime.datetime(pothole[7], "%a, %d %b %Y %H:%M:%S %Z")
         pothole_cy_data.append({"srvrequestid":pothole[0],
                             "latitude": pothole[1],
                             "longitude": pothole[2],
@@ -107,6 +108,7 @@ def sdcpa_data():
         unique_month_request.add(pothole[5])
         unique_date_request.add(pothole[4])
         unique_service_id.add(pothole[0])
+        unique_date_closed.add(pothole[7])
 
     # Extra features for filtering
     data["uniqueDateList"] = list(unique_date_request)
@@ -114,6 +116,7 @@ def sdcpa_data():
     data["minFilterDate"] = min(unique_date_request)
     data["maxFilterDate"] = max(unique_date_request)
     data["uniqueServiceIDList"] = list(unique_service_id)
+    data["uniqueDateClosed"] = list(unique_date_closed)
 
     
     # Weather.dapr,
