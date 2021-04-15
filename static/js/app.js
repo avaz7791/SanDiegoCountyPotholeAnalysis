@@ -125,7 +125,7 @@ d3.json("/council_districts_datasd").then(function(districts_data) {
           "<h5><h5>Status: " + response.potholes_cy[i].status + 
           "<h5><h5>Date Requested: " + response.potholes_cy[i].daterequest +
           "<h5><h5>Case Age: " + response.potholes_cy[i].caseagedays + 
-          "<h5><h5>Coordinates: " + response.potholes_cy[i].latitude + " " + response.potholes_cy[i].longitude + "</h5>"))
+          "<h5><h5>Coordinates: " + response.potholes_cy[i].latitude + ", " + response.potholes_cy[i].longitude + "</h5>"))
 
     }
     
