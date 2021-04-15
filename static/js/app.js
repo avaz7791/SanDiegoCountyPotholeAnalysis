@@ -76,7 +76,7 @@ d3.json("/council_districts_datasd").then(function(response) {
       return {
         color: "black",
         fillColor: chooseColor(feature.properties.objectid),
-        fillOpacity: 0.5,
+        fillOpacity: 0.4,
         weight: 1.5
       };
     
@@ -89,14 +89,14 @@ d3.json("/council_districts_datasd").then(function(response) {
         mouseover: function(event) {
           layer = event.target;
           layer.setStyle({
-            fillOpacity: 0.9
+            fillOpacity: 0.2
           });
         },
         // When the cursor no longer hovers over a map feature - when the mouseout event occurs - the feature's opacity reverts back to 50%
         mouseout: function(event) {
           layer = event.target;
           layer.setStyle({
-            fillOpacity: 0.5
+            fillOpacity: 0.4
           });
         },
         // When a feature (neighborhood) is clicked, it is enlarged to fit the screen
@@ -105,7 +105,7 @@ d3.json("/council_districts_datasd").then(function(response) {
         }
       });
       // Giving each feature a pop-up with information pertinent to it
-      layer.bindPopup("<h1>" + feature.properties.district + "</h1> <hr> <h2>" + feature.properties.district + "</h2>");
+      layer.bindPopup("<h2>District: " + feature.properties.district + "</h2>");
 
     }
   }).addTo(myMap);
