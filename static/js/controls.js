@@ -29,24 +29,24 @@ d3.json("/api/sdcpa_data").then(function(data) {
     });
     // var monthLst = data.uniqueMonthList;
     idLst = data.uniqueServiceIDList;
+});
 
-    // set min and max date value for filters
-    var fromDatePicker = d3.select("#fromDate");
-    var toDatePicker = d3.select("#toDate");
+// set min and max date value for filters
+var fromDatePicker = d3.select("#fromDate");
+var toDatePicker = d3.select("#toDate");
 
-    fromDatePicker.attr("min", minFilterDate)
-                .attr("max", maxFilterDate);
-    toDatePicker.attr("min", minFilterDate)
-                .attr("max", maxFilterDate);
+fromDatePicker.attr("min", minFilterDate)
+            .attr("max", maxFilterDate);
+toDatePicker.attr("min", minFilterDate)
+            .attr("max", maxFilterDate);
 
-    var filterForm = d3.select("#filter-form");
-    var filterButton = d3.select("#filter-button");
+var filterForm = d3.select("#filter-form");
+var filterButton = d3.select("#filter-button");
 
-    filterForm.on("submit", filterData);
-    filterButton.on("click", filterData);
+filterForm.on("submit", filterData);
+filterButton.on("click", filterData);
 
-    resetData(minFilterDate, maxFilterDate);
-})
+resetData(minFilterDate, maxFilterDate);
 
 function resetData(minDate, maxDate) {
     var filteredDates = [];
