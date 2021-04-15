@@ -28,45 +28,45 @@ var myMap = L.map("mapid", {
 });
 
 // Grabbing our GeoJSON data..Update File
-d3.json("/api/sdcpa_data").then(function(response) 
-{
-  L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-    attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
-    tileSize: 512,
-    maxZoom: 18,
-    zoomOffset: -1,
-    id: "mapbox/streets-v11",
-    accessToken: API_KEY
-  }).addTo(myMap);
+// d3.json("/api/sdcpa_data").then(function(response) 
+// {
+L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+  attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
+  tileSize: 512,
+  maxZoom: 18,
+  zoomOffset: -1,
+  id: "mapbox/streets-v11",
+  accessToken: API_KEY
+}).addTo(myMap);
 
-  // Create a new marker cluster group
-  var markers = L.markerClusterGroup();
+// Create a new marker cluster group
+var markers = L.markerClusterGroup();
 
-  // Loop through data
-  for (var i = 0; i < response.potholes_cy.length; i++) {
+// Loop through data
+for (var i = 0; i < filteredPotholes.length; i++) {
+  filteredPothole = filteredPotholes[i]
+  // Set the data location property to a variable
+  var phlocation = [filteredPothole.latitude, filteredPothole.longitude]
+  
 
-    // Set the data location property to a variable
-    var phlocation = [response.potholes_cy[i].latitude, response.potholes_cy[i].longitude]
-    
+  // Check for location property4
+  if (phlocation) {
 
-    // Check for location property4
-    if (phlocation) {
+    // Add a new marker to the cluster group and bind a pop-up
+    markers.addLayer(L.marker([phlocation[0], phlocation[1]])
+        .bindPopup("<h5>Service ID: " + filteredPothole.srvrequestid +
+        "<h5><h5>Status: " + filteredPothole.status + 
+        "<h5><h5>Date Requested: " + filteredPothole.daterequest +
+        "<h5><h5>Case Age: " + filteredPothole.caseagedays + 
+        "<h5><h5>Coordinates: " + filteredPothole.latitude + ", " + filteredPothole.longitude + "</h5>"))
 
-      // Add a new marker to the cluster group and bind a pop-up
-      markers.addLayer(L.marker([phlocation[0], phlocation[1]])
-         .bindPopup("<h5>Service ID: " + response.potholes_cy[i].srvrequestid +
-          "<h5><h5>Status: " + response.potholes_cy[i].status + 
-          "<h5><h5>Date Requested: " + response.potholes_cy[i].daterequest +
-          "<h5><h5>Case Age: " + response.potholes_cy[i].caseagedays + 
-          "<h5><h5>Coordinates: " + response.potholes_cy[i].latitude + ", " + response.potholes_cy[i].longitude + "</h5>"))
-
-    }
-    
   }
+  
+}
 
-  // Add our marker cluster layer to the map
-  myMap.addLayer(markers);
-});
+// Add our marker cluster layer to the map
+myMap.addLayer(markers);
+// });
 
 // districts_data = response.council_districts_datasd
 d3.json("/council_districts_datasd").then(function(response) {
