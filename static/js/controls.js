@@ -86,19 +86,17 @@ function resetData(minDate, maxDate) {
                 pothole.date <= maxDate) {
             filteredPotholes.push(pothole);
             // Append to the list
-            if (dix < 100) {
-                d3.select("#filteredList").append("li")
-                    .attr("class", "list-group-item list-group-item-action")
-                    .attr("id", pothole.id)
-                    .attr("data-toggle", "list")
-                    .attr("role", "tab")
-                    .html(
-                        "<h5>Service ID:</h5>" + pothole.id + "<br>" + 
-                        "<h5>Status:</h5>" + pothole.status + "<br>"  +
-                        "<h5>Date Requested:</h5>" + pothole.date + "<br>" +
-                        "<h5>Case Age:</h5>" + pothole.age
-                        );
-            }
+            d3.select("#filteredList").append("li")
+                .attr("class", "list-group-item list-group-item-action")
+                .attr("id", pothole.id)
+                .attr("data-toggle", "list")
+                .attr("role", "tab")
+                .html(
+                    "<h5>Service ID:</h5>" + pothole.id + "<br>" + 
+                    "<h5>Status:</h5>" + pothole.status + "<br>"  +
+                    "<h5>Date Requested:</h5>" + pothole.date + "<br>" +
+                    "<h5>Case Age:</h5>" + pothole.age
+                    );
             
         }
     }
