@@ -16,6 +16,26 @@ function utcToISODate(str) {
 var potholes = [];
 var filteredPotholes = []
 
+var myMap = L.map("mapid", {
+    center: [32.7157, -117.1611],
+    zoom: 11
+});
+
+// Grabbing our GeoJSON data..Update File
+// d3.json("/api/sdcpa_data").then(function(response) 
+// {
+L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
+tileSize: 512,
+maxZoom: 18,
+zoomOffset: -1,
+id: "mapbox/streets-v11",
+accessToken: API_KEY
+}).addTo(myMap);
+
+// Create a new marker cluster group
+var markers = L.markerClusterGroup();
+
 // Read from d3.json
 d3.json("/api/sdcpa_data").then(function(data) {
     // Parse all dates into %YYY-MM-DD format
@@ -46,7 +66,7 @@ d3.json("/api/sdcpa_data").then(function(data) {
                 .attr("max", maxFilterDate);
     
     resetData(minFilterDate, maxFilterDate);
-    addMarkers(potholes)
+    filterMarkers(potholes)
 });
 
 // var filteredDates = [];
@@ -83,7 +103,7 @@ function resetData(minDate, maxDate) {
         }
     }
 
-    addMarkers(filteredPotholes);
+    filterMarkers(filteredPotholes);
 }
 
 
@@ -143,27 +163,10 @@ function chooseColor(objectid) {
     }
   }
   
-function addMarkers(filteredPotholes) {
-    var myMap = L.map("mapid", {
-        center: [32.7157, -117.1611],
-        zoom: 11
-      });
-      
-      // Grabbing our GeoJSON data..Update File
-      // d3.json("/api/sdcpa_data").then(function(response) 
-      // {
-      L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-        attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
-        tileSize: 512,
-        maxZoom: 18,
-        zoomOffset: -1,
-        id: "mapbox/streets-v11",
-        accessToken: API_KEY
-      }).addTo(myMap);
-      
-      // Create a new marker cluster group
-      var markers = L.markerClusterGroup();
-      
+
+function filterMarkers(filteredPotholes) {
+      markers.clearLayers();
+
       // Loop through data
       for (var i = 0; i < filteredPotholes.length; i++) {
         filteredPothole = filteredPotholes[i]
