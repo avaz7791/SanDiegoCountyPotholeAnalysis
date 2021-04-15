@@ -58,7 +58,6 @@ function resetData(minDate, maxDate) {
                             .attr("id", id)
                             .attr("data-toggle", "list")
                             .attr("role", "tab")
-                            .on("click", focusPothole(+id))
                             .text(date)
             }
         }
@@ -86,7 +85,6 @@ function resetData(minDate, maxDate) {
 // filterButton.on("click", filterData);
 
 // resetData(minFilterDate, maxFilterDate, dateLst); 
-
 
 
 function filterData() {
