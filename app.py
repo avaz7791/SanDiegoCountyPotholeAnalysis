@@ -86,27 +86,35 @@ def sdcpa_data():
     unique_date_closed = set()
     unique_service_id = set()
     for pothole in pothole_response:
-        # datetime_request_obj = datetime.datetime(pothole[4], "%a, %d %b %Y %H:%M:%S %Z")
-        # datetime_closed_obj = datetime.datetime(pothole[7], "%a, %d %b %Y %H:%M:%S %Z")
+        date_request_str = pothole[4]
+        if date_request_str != "":
+            datetime_request_obj = datetime.datetime(pothole[4], "%a, %d %b %Y %H:%M:%S %Z")
+        else:
+            datetime_request_obj = datetime.datetime.now()
+        date_closed_str = pothole[7]
+        if date_closed_str != "":
+            datetime_closed_obj = datetime.datetime(pothole[7], "%a, %d %b %Y %H:%M:%S %Z")
+        else:
+            datetime_closed_obj = datetime.datetime.now()
         pothole_cy_data.append({"srvrequestid":pothole[0],
                             "latitude": pothole[1],
                             "longitude": pothole[2],
                             "status"    : pothole[3],
-                            "daterequest": pothole[4],
-                            "monthrequest": pothole[5],
-                            "monthclosed": pothole[6],
-                            "dateclosed" : pothole[7],
-                            # "daterequest": datetime_request_obj.strftime("%Y-%m-%d"),
-                            # "monthrequest": datetime_request_obj.strftime("%B"),
-                            # "monthclosed": datetime_closed_obj.strftime("%B"),
-                            # "dateclosed" : datetime_closed_obj.strftime("%Y-%m-%d"),
+                            # "daterequest": pothole[4],
+                            # "monthrequest": pothole[5],
+                            # "monthclosed": pothole[6],
+                            # "dateclosed" : pothole[7],
+                            "daterequest": datetime_request_obj.strftime("%Y-%m-%d"),
+                            "monthrequest": datetime_request_obj.strftime("%B"),
+                            "monthclosed": datetime_closed_obj.strftime("%B"),
+                            "dateclosed" : datetime_closed_obj.strftime("%Y-%m-%d"),
                             "caseagedays": pothole[8],
                             "servicename": pothole[9],
                             "district" : pothole[10]})
-        # unique_month_request.add(datetime_request_obj.strftime("%B"))
-        # unique_date_request.add(datetime_request_obj.strftime("%Y-%m-%d"))
-        unique_month_request.add(pothole[5])
-        unique_date_request.add(pothole[4])
+        unique_month_request.add(datetime_request_obj.strftime("%B"))
+        unique_date_request.add(datetime_request_obj.strftime("%Y-%m-%d"))
+        # unique_month_request.add(pothole[5])
+        # unique_date_request.add(pothole[4])
         unique_service_id.add(pothole[0])
         unique_date_closed.add(pothole[7])
 
