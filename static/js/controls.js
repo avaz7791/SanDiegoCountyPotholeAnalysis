@@ -33,6 +33,9 @@ id: "mapbox/streets-v11",
 accessToken: API_KEY
 }).addTo(myMap);
 
+// Add districts
+addDistricts()
+
 // Create a new marker cluster group
 var markers = L.markerClusterGroup();
 
