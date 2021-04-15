@@ -23,7 +23,6 @@ d3.json("/api/sdcpa_data").then(function(data) {
     ///////////////////////////////////////////
     minFilterDate = utcToISODate(data.minFilterDate);
     maxFilterDate = utcToISODate(data.maxFilterDate);
-    dateLst = [];
     data.uniqueDateList.forEach(function(datestr) {
         dateLst.push(utcToISODate(datestr))
     });
@@ -31,47 +30,43 @@ d3.json("/api/sdcpa_data").then(function(data) {
     idLst = data.uniqueServiceIDList;
 
         // set min and max date value for filters
-    var fromDatePicker = d3.select("#fromDate");
-    var toDatePicker = d3.select("#toDate");
-
-    fromDatePicker.attr("min", minFilterDate)
+    
+    d3.select("#fromDate").attr("min", minFilterDate)
                 .attr("max", maxFilterDate);
-    toDatePicker.attr("min", minFilterDate)
+    d3.select("#toDate").attr("min", minFilterDate)
                 .attr("max", maxFilterDate);
+    
+    resetData(minFilterDate, maxFilterDate);
 });
 
+var filteredDates = [];
+var filteredIDs = [];
+d3.select("#filter-form").on("submit", filterData);
+d3.select("#filter-button").on("click", filterData);
 
-
-var filterForm = d3.select("#filter-form");
-var filterButton = d3.select("#filter-button");
-
-filterForm.on("submit", filterData);
-filterButton.on("click", filterData);
-
-resetData(minFilterDate, maxFilterDate);
 
 function resetData(minDate, maxDate) {
-    var filteredDates = [];
-        var filteredIDs = [];
-        var filteredList = d3.select("#filteredList");
-        // Clear the list
-        filteredList.html("")
-        for (var dix = 0; (dix<dateLst.length && dix<100); dix++) {
-            date = dateLst[dix];
-            id = idLst[dix];
-            // filter dates
-            if (date >= minDate && date <= maxDate) {
-                filteredDates.push(date);
-                filteredIDs.push(id);
-                // Append to the list
-                filteredList.append("li")
-                            .attr("class", "list-group-item list-group-item-action")
-                            .attr("id", id)
-                            .attr("data-toggle", "list")
-                            .attr("role", "tab")
-                            .text(date)
-            }
+    filteredDates = [];
+    filteredIDs = [];
+    // Clear the list
+    d3.select("#filteredList").html("")
+    for (var dix = 0; (dix<dateLst.length && dix<100); dix++) {
+        date = dateLst[dix];
+        id = idLst[dix];
+        // filter dates
+        if (date >= minDate && 
+                date <= maxDate) {
+            filteredDates.push(date);
+            filteredIDs.push(id);
+            // Append to the list
+            filteredList.append("li")
+                        .attr("class", "list-group-item list-group-item-action")
+                        .attr("id", id)
+                        .attr("data-toggle", "list")
+                        .attr("role", "tab")
+                        .text(date)
         }
+    }
 }
 
 
