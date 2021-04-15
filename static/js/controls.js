@@ -59,24 +59,23 @@ function resetData(minDate, maxDate) {
     // Clear the list
     d3.select("#filteredList").html("")
     for (var dix = 0; (dix<potholes.length); dix++) {
-        date = potholes[dix].date;
-        id = potholes[dix].id;
+        pothole = potholes[dix]
         // filter dates
-        if (date >= minDate && 
-                date <= maxDate) {
-            filteredPotholes.push(potholes[dix]);
+        if (pothole.date >= minDate && 
+                pothole.date <= maxDate) {
+            filteredPotholes.push(pothole);
             // Append to the list
             if (dix < 100) {
                 d3.select("#filteredList").append("li")
                     .attr("class", "list-group-item list-group-item-action")
-                    .attr("id", id)
+                    .attr("id", pothole.id)
                     .attr("data-toggle", "list")
                     .attr("role", "tab")
                     .text(
-                        "<h5>Service ID: " + filteredPothole.srvrequestid +
-                        "<h5><h5>Status: " + filteredPothole.status + 
-                        "<h5><h5>Date Requested: " + filteredPothole.daterequest +
-                        "<h5><h5>Case Age: " + filteredPothole.caseagedays
+                        "<h5>Service ID: " + pothole.id +
+                        "<h5><h5>Status: " + pothole.status + 
+                        "<h5><h5>Date Requested: " + pothole.date +
+                        "<h5><h5>Case Age: " + pothole.age
                         );
             }
             
