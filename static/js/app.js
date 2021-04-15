@@ -64,9 +64,9 @@ d3.json("/api/sdcpa_data").then(function(response)
 });
 
 // districts_data = response.council_districts_datasd
-d3.json("/council_districts_datasd").then(function(districts_data) {
+d3.json("/council_districts_datasd").then(function(response) {
   // Creating a geoJSON layer with the retrieved data
-  L.geoJson(districts_data, {
+  L.geoJson(response, {
     style: function(feature) {
       return {
         color: "black",
