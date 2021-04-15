@@ -4,10 +4,7 @@
  * Here, I'm using sample values to prepare the html files
  * and the javascript accordingly.
  */
-var minFilterDate;
-var maxFilterDate;
-var dateLst = [];
-var idLst = [];
+
 // var cityList = ["San Diego", "Clairemont", "La Jolla"]
 
 
@@ -16,15 +13,26 @@ function utcToISODate(str) {
     return d.toISOString().slice(0,10);
 }
 
+var potholes = [];
+
 // Read from d3.json
 d3.json("/api/sdcpa_data").then(function(data) {
     // Parse all dates into %YYY-MM-DD format
     ///////////////////////////////////////////
     ///////////////////////////////////////////
-    minFilterDate = utcToISODate(data.minFilterDate);
-    maxFilterDate = utcToISODate(data.maxFilterDate);
-    data.uniqueDateList.forEach(function(datestr) {
-        dateLst.push(utcToISODate(datestr))
+
+
+    var minFilterDate = utcToISODate(data.minFilterDate);
+    var maxFilterDate = utcToISODate(data.maxFilterDate);
+    data.potholes_cy.forEach(pothole => {
+        potholes.push({
+            "id": pothole.srvrequestid,
+            "date": pothole.datarequest,
+            "age": pothole.caseagedays,
+            "latitude": pothole.latitude,
+            "longitude": pothole.longitude,
+            "status": pothole.status
+        });
     });
     // var monthLst = data.uniqueMonthList;
     idLst = data.uniqueServiceIDList;
@@ -36,30 +44,29 @@ d3.json("/api/sdcpa_data").then(function(data) {
     d3.select("#toDate").attr("min", minFilterDate)
                 .attr("max", maxFilterDate);
     
-    resetData(minFilterDate, maxFilterDate);
+    resetData(minFilterDate, maxFilterDate, potholes);
 });
 
-var filteredDates = [];
-var filteredIDs = [];
+// var filteredDates = [];
+// var filteredIDs = [];
 d3.select("#filter-form").on("submit", filterData);
 d3.select("#filter-button").on("click", filterData);
 
 
-function resetData(minDate, maxDate) {
-    filteredDates = [];
-    filteredIDs = [];
+function resetData(minDate, maxDate, potholes) {
+    filteredPotholes = [];
     // Clear the list
     d3.select("#filteredList").html("")
-    for (var dix = 0; (dix<dateLst.length && dix<100); dix++) {
-        date = dateLst[dix];
-        id = idLst[dix];
+    for (var dix = 0; (dix<potholes.length && dix<100); dix++) {
+        date = potholes[dix].date;
+        id = potholes[dix].id;
         // filter dates
         if (date >= minDate && 
                 date <= maxDate) {
-            filteredDates.push(date);
-            filteredIDs.push(id);
+            filteredPotholes.push({"date": date,
+                                   "id": id});
             // Append to the list
-            filteredList.append("li")
+            d3.select("#filteredList").append("li")
                         .attr("class", "list-group-item list-group-item-action")
                         .attr("id", id)
                         .attr("data-toggle", "list")
@@ -67,6 +74,8 @@ function resetData(minDate, maxDate) {
                         .text(date)
         }
     }
+
+    return filteredPotholes;
 }
 
 
@@ -78,7 +87,7 @@ function filterData() {
     var maxDate = d3.select("#toDate").property("value");
 
     if (isDatesOk) {
-        resetData(minDate, maxDate);
+        resetData(minDate, maxDate, potholes);
     }
     else {console.log("Choose correct range");}
 }
@@ -107,7 +116,6 @@ function focusPothole(id) {
     resetPothole(id);
     console.log(id);
     // Focus on the chosen pothole in the map
-    
 }
 
 
