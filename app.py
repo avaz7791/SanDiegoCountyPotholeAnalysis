@@ -98,8 +98,8 @@ def sdcpa_data():
                             "caseagedays": pothole[8],
                             "servicename": pothole[9],
                             "district" : pothole[10]})
-        unique_month_request.add(pothole[5])
-        unique_date_request.add(pothole[4])
+        unique_month_request.add(datetime_request_obj.strftime("%B"))
+        unique_date_request.add(datetime_request_obj.strftime("%Y-%m-%d"))
         unique_service_id.add(pothole[0])
 
     # Extra features for filtering
@@ -110,8 +110,6 @@ def sdcpa_data():
     data["uniqueServiceIDList"] = list(unique_service_id)
 
     
-    "maxFilterDate":"Sun, 28 Mar 2021 00:00:00 GMT","minFilterDate":"Mon, 04 Jan 2021 00:00:00 GMT"
-
     # Weather.dapr,
     #print(results)
     weather_cy_data = []
