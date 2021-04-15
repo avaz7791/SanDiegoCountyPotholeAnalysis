@@ -29,16 +29,18 @@ d3.json("/api/sdcpa_data").then(function(data) {
     });
     // var monthLst = data.uniqueMonthList;
     idLst = data.uniqueServiceIDList;
+
+        // set min and max date value for filters
+    var fromDatePicker = d3.select("#fromDate");
+    var toDatePicker = d3.select("#toDate");
+
+    fromDatePicker.attr("min", minFilterDate)
+                .attr("max", maxFilterDate);
+    toDatePicker.attr("min", minFilterDate)
+                .attr("max", maxFilterDate);
 });
 
-// set min and max date value for filters
-var fromDatePicker = d3.select("#fromDate");
-var toDatePicker = d3.select("#toDate");
 
-fromDatePicker.attr("min", minFilterDate)
-            .attr("max", maxFilterDate);
-toDatePicker.attr("min", minFilterDate)
-            .attr("max", maxFilterDate);
 
 var filterForm = d3.select("#filter-form");
 var filterButton = d3.select("#filter-button");
@@ -76,10 +78,9 @@ function resetData(minDate, maxDate) {
 function filterData() {
     // d3.event.preventDefault();
     // select summary text and make it read
-    var formHelp = d3.select("#dateRangeHelp");
-    var isDatesOk = checkFromToDates(formHelp);
-    var minDate = fromDatePicker.property("value");
-    var maxDate = toDatePicker.property("value");
+    var isDatesOk = checkFromToDates(d3.select("#dateRangeHelp"));
+    var minDate = d3.select("#fromDate").property("value");
+    var maxDate = d3.select("#toDate").property("value");
 
     if (isDatesOk) {
         resetData(minDate, maxDate);
@@ -89,14 +90,14 @@ function filterData() {
 
 function checkFromToDates(formHelp) {
     // Check for range
-    if (fromDatePicker.property("value") > toDatePicker.property("value")) {
+    if (d3.select("#fromDate").property("value") > d3.select("#toDate").property("value")) {
         formHelp.text("From: cannot be larger than To:")
                 .attr("class", "form-text text-danger error");
         return false;
     }
     // Check for null
-    else if (fromDatePicker.property("value") == "" || 
-        toDatePicker.property("value") == "") {
+    else if (d3.select("#fromDate").property("value") == "" || 
+        d3.select("#toDate").property("value") == "") {
         formHelp.text("Choose a valid date")
             .attr("class", "form-text text-danger error");
         return false;
